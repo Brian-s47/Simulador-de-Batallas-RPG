@@ -1,0 +1,25 @@
+{
+  "name": "simulador-de-batallas-rpg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brian-s47/Simulador-de-Batallas-RPG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brian-s47/Simulador-de-Batallas-RPG/issues"
+  },
+  "homepage": "https://github.com/Brian-s47/Simulador-de-Batallas-RPG#readme",
+  "description": "",
+  "dependencies": {
+    "inquirer": "^9.2.7",
+    "lowdb": "^3.0.0",
+    "uuid": "^9.0.1"
+  }
+}
