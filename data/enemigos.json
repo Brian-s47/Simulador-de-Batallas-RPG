@@ -1,229 +1,227 @@
-{
-  "enemigos": [
-    {
-      "nombre": "Mago Malvado",
-      "tipo": "Enemigo",
-      "nivel": 1,
-      "salud": 100,
-      "ataque": 5,
-      "defensaFisica": 2,
-      "defensaMagica": 5
-    },
-    {
-      "nombre": "Orco Furioso",
-      "tipo": "Enemigo",
-      "nivel": 1,
-      "salud": 120,
-      "ataque": 6,
-      "defensaFisica": 5,
-      "defensaMagica": 1
-    },
-    {
-      "nombre": "Orco Defensor",
-      "tipo": "Enemigo",
-      "nivel": 1,
-      "salud": 150,
-      "ataque": 3,
-      "defensaFisica": 6,
-      "defensaMagica": 2
-    },
-        {
-      "nombre": "Orco Asesino",
-      "tipo": "Enemigo",
-      "nivel": 1,
-      "salud": 70,
-      "ataque": 7,
-      "defensaFisica": 1,
-      "defensaMagica": 1
-    },
-    {
-      "nombre": "Hechicero Supremo",
-      "tipo": "Enemigo",
-      "nivel": 1,
-      "salud": 100,
-      "ataque": 7,
-      "defensaFisica": 1,
-      "defensaMagica": 9
-    },
-    {
-      "nombre": "Chamán de las Sombras",
-      "tipo": "Enemigo",
-      "nivel": 2,
-      "salud": 130,
-      "ataque": 8,
-      "defensaFisica": 3,
-      "defensaMagica": 7
-    },
-    {
-      "nombre": "Orco Berserker",
-      "tipo": "Enemigo",
-      "nivel": 2,
-      "salud": 140,
-      "ataque": 10,
-      "defensaFisica": 4,
-      "defensaMagica": 2
-    },
-    {
-      "nombre": "Orco Guardián",
-      "tipo": "Enemigo",
-      "nivel": 2,
-      "salud": 180,
-      "ataque": 5,
-      "defensaFisica": 8,
-      "defensaMagica": 3
-    },
-    {
-      "nombre": "Asesino Sombrío",
-      "tipo": "Enemigo",
-      "nivel": 2,
-      "salud": 90,
-      "ataque": 11,
-      "defensaFisica": 2,
-      "defensaMagica": 2
-    },
-    {
-      "nombre": "Archimago Oscuro",
-      "tipo": "Enemigo",
-      "nivel": 2,
-      "salud": 120,
-      "ataque": 10,
-      "defensaFisica": 2,
-      "defensaMagica": 10
-    },
-    {
-      "nombre": "Chamán del Abismo",
-      "tipo": "Enemigo",
-      "nivel": 3,
-      "salud": 160,
-      "ataque": 10,
-      "defensaFisica": 4,
-      "defensaMagica": 9
-    },
-    {
-      "nombre": "Señor de la Guerra Orco",
-      "tipo": "Enemigo",
-      "nivel": 3,
-      "salud": 170,
-      "ataque": 12,
-      "defensaFisica": 5,
-      "defensaMagica": 3
-    },
-    {
-      "nombre": "Orco de Élite",
-      "tipo": "Enemigo",
-      "nivel": 3,
-      "salud": 200,
-      "ataque": 7,
-      "defensaFisica": 10,
-      "defensaMagica": 4
-    },
-    {
-      "nombre": "Asesino de Sangre",
-      "tipo": "Enemigo",
-      "nivel": 3,
-      "salud": 110,
-      "ataque": 14,
-      "defensaFisica": 3,
-      "defensaMagica": 3
-    },
-    {
-      "nombre": "Hechicero de las Ruinas",
-      "tipo": "Enemigo",
-      "nivel": 3,
-      "salud": 140,
-      "ataque": 12,
-      "defensaFisica": 3,
-      "defensaMagica": 12
-    },
-        {
-      "nombre": "Oráculo del Vacío",
-      "tipo": "Enemigo",
-      "nivel": 4,
-      "salud": 190,
-      "ataque": 12,
-      "defensaFisica": 5,
-      "defensaMagica": 13
-    },
-    {
-      "nombre": "Campeón Orco",
-      "tipo": "Enemigo",
-      "nivel": 4,
-      "salud": 200,
-      "ataque": 14,
-      "defensaFisica": 6,
-      "defensaMagica": 4
-    },
-    {
-      "nombre": "Guardián de Hierro",
-      "tipo": "Enemigo",
-      "nivel": 4,
-      "salud": 240,
-      "ataque": 8,
-      "defensaFisica": 12,
-      "defensaMagica": 5
-    },
-    {
-      "nombre": "Verdugo de las Sombras",
-      "tipo": "Enemigo",
-      "nivel": 4,
-      "salud": 130,
-      "ataque": 16,
-      "defensaFisica": 4,
-      "defensaMagica": 4
-    },
-    {
-      "nombre": "Archisabio Maldito",
-      "tipo": "Enemigo",
-      "nivel": 4,
-      "salud": 160,
-      "ataque": 14,
-      "defensaFisica": 4,
-      "defensaMagica": 15
-    },
-       {
-      "nombre": "Profeta del Fin de los Tiempos",
-      "tipo": "Enemigo",
-      "nivel": 5,
-      "salud": 300,
-      "ataque": 18,
-      "defensaFisica": 6,
-      "defensaMagica": 20
-    },
-    {
-      "nombre": "Destructor Orco Ancestral",
-      "tipo": "Enemigo",
-      "nivel": 5,
-      "salud": 320,
-      "ataque": 20,
-      "defensaFisica": 8,
-      "defensaMagica": 6
-    },
-    {
-      "nombre": "Titán de la Guardia Eterna",
-      "tipo": "Enemigo",
-      "nivel": 5,
-      "salud": 400,
-      "ataque": 12,
-      "defensaFisica": 20,
-      "defensaMagica": 10
-    },
-    {
-      "nombre": "Sombra de la Muerte Silente",
-      "tipo": "Enemigo",
-      "nivel": 5,
-      "salud": 180,
-      "ataque": 24,
-      "defensaFisica": 5,
-      "defensaMagica": 5
-    },
-    {
-      "nombre": "Señor del Caos Arcano",
-      "tipo": "Enemigo",
-      "nivel": 5,
-      "salud": 280,
-      "ataque": 22,
-      "defensaFisica": 6,
-      "defensaMagica": 22
-    }
-  ]
-}
+[
+  {
+    "nombre": "Mago Malvado",
+    "tipo": "Enemigo",
+    "nivel": 1,
+    "salud": 100,
+    "ataque": 5,
+    "defensaFisica": 2,
+    "defensaMagica": 5
+  },
+  {
+    "nombre": "Orco Furioso",
+    "tipo": "Enemigo",
+    "nivel": 1,
+    "salud": 120,
+    "ataque": 6,
+    "defensaFisica": 5,
+    "defensaMagica": 1
+  },
+  {
+    "nombre": "Orco Defensor",
+    "tipo": "Enemigo",
+    "nivel": 1,
+    "salud": 150,
+    "ataque": 3,
+    "defensaFisica": 6,
+    "defensaMagica": 2
+  },
+      {
+    "nombre": "Orco Asesino",
+    "tipo": "Enemigo",
+    "nivel": 1,
+    "salud": 70,
+    "ataque": 7,
+    "defensaFisica": 1,
+    "defensaMagica": 1
+  },
+  {
+    "nombre": "Hechicero Supremo",
+    "tipo": "Enemigo",
+    "nivel": 1,
+    "salud": 100,
+    "ataque": 7,
+    "defensaFisica": 1,
+    "defensaMagica": 9
+  },
+  {
+    "nombre": "Chamán de las Sombras",
+    "tipo": "Enemigo",
+    "nivel": 2,
+    "salud": 130,
+    "ataque": 8,
+    "defensaFisica": 3,
+    "defensaMagica": 7
+  },
+  {
+    "nombre": "Orco Berserker",
+    "tipo": "Enemigo",
+    "nivel": 2,
+    "salud": 140,
+    "ataque": 10,
+    "defensaFisica": 4,
+    "defensaMagica": 2
+  },
+  {
+    "nombre": "Orco Guardián",
+    "tipo": "Enemigo",
+    "nivel": 2,
+    "salud": 180,
+    "ataque": 5,
+    "defensaFisica": 8,
+    "defensaMagica": 3
+  },
+  {
+    "nombre": "Asesino Sombrío",
+    "tipo": "Enemigo",
+    "nivel": 2,
+    "salud": 90,
+    "ataque": 11,
+    "defensaFisica": 2,
+    "defensaMagica": 2
+  },
+  {
+    "nombre": "Archimago Oscuro",
+    "tipo": "Enemigo",
+    "nivel": 2,
+    "salud": 120,
+    "ataque": 10,
+    "defensaFisica": 2,
+    "defensaMagica": 10
+  },
+  {
+    "nombre": "Chamán del Abismo",
+    "tipo": "Enemigo",
+    "nivel": 3,
+    "salud": 160,
+    "ataque": 10,
+    "defensaFisica": 4,
+    "defensaMagica": 9
+  },
+  {
+    "nombre": "Señor de la Guerra Orco",
+    "tipo": "Enemigo",
+    "nivel": 3,
+    "salud": 170,
+    "ataque": 12,
+    "defensaFisica": 5,
+    "defensaMagica": 3
+  },
+  {
+    "nombre": "Orco de Élite",
+    "tipo": "Enemigo",
+    "nivel": 3,
+    "salud": 200,
+    "ataque": 7,
+    "defensaFisica": 10,
+    "defensaMagica": 4
+  },
+  {
+    "nombre": "Asesino de Sangre",
+    "tipo": "Enemigo",
+    "nivel": 3,
+    "salud": 110,
+    "ataque": 14,
+    "defensaFisica": 3,
+    "defensaMagica": 3
+  },
+  {
+    "nombre": "Hechicero de las Ruinas",
+    "tipo": "Enemigo",
+    "nivel": 3,
+    "salud": 140,
+    "ataque": 12,
+    "defensaFisica": 3,
+    "defensaMagica": 12
+  },
+      {
+    "nombre": "Oráculo del Vacío",
+    "tipo": "Enemigo",
+    "nivel": 4,
+    "salud": 190,
+    "ataque": 12,
+    "defensaFisica": 5,
+    "defensaMagica": 13
+  },
+  {
+    "nombre": "Campeón Orco",
+    "tipo": "Enemigo",
+    "nivel": 4,
+    "salud": 200,
+    "ataque": 14,
+    "defensaFisica": 6,
+    "defensaMagica": 4
+  },
+  {
+    "nombre": "Guardián de Hierro",
+    "tipo": "Enemigo",
+    "nivel": 4,
+    "salud": 240,
+    "ataque": 8,
+    "defensaFisica": 12,
+    "defensaMagica": 5
+  },
+  {
+    "nombre": "Verdugo de las Sombras",
+    "tipo": "Enemigo",
+    "nivel": 4,
+    "salud": 130,
+    "ataque": 16,
+    "defensaFisica": 4,
+    "defensaMagica": 4
+  },
+  {
+    "nombre": "Archisabio Maldito",
+    "tipo": "Enemigo",
+    "nivel": 4,
+    "salud": 160,
+    "ataque": 14,
+    "defensaFisica": 4,
+    "defensaMagica": 15
+  },
+      {
+    "nombre": "Profeta del Fin de los Tiempos",
+    "tipo": "Enemigo",
+    "nivel": 5,
+    "salud": 300,
+    "ataque": 18,
+    "defensaFisica": 6,
+    "defensaMagica": 20
+  },
+  {
+    "nombre": "Destructor Orco Ancestral",
+    "tipo": "Enemigo",
+    "nivel": 5,
+    "salud": 320,
+    "ataque": 20,
+    "defensaFisica": 8,
+    "defensaMagica": 6
+  },
+  {
+    "nombre": "Titán de la Guardia Eterna",
+    "tipo": "Enemigo",
+    "nivel": 5,
+    "salud": 400,
+    "ataque": 12,
+    "defensaFisica": 20,
+    "defensaMagica": 10
+  },
+  {
+    "nombre": "Sombra de la Muerte Silente",
+    "tipo": "Enemigo",
+    "nivel": 5,
+    "salud": 180,
+    "ataque": 24,
+    "defensaFisica": 5,
+    "defensaMagica": 5
+  },
+  {
+    "nombre": "Señor del Caos Arcano",
+    "tipo": "Enemigo",
+    "nivel": 5,
+    "salud": 280,
+    "ataque": 22,
+    "defensaFisica": 6,
+    "defensaMagica": 22
+  }
+]

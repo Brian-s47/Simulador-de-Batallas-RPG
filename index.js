@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
 const path = require('path');
 const { Low, JSONFile } = require('lowdb');
 
@@ -17,7 +16,6 @@ const {
 
 // 📁 Base de datos
 const dbPath = path.join(__dirname, 'data', 'personajes.json');
-fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 const adapter = new JSONFile(dbPath);
 const db = new Low(adapter);
 
@@ -27,7 +25,7 @@ const objetosDisponibles = require('./data/objetos.json');
 // 🧠 Inicializar base de datos
 async function initDB() {
   await db.read();
-  db.data ||= { personajes: [] };
+  db.data ||= [];
   await db.write();
 }
 
@@ -39,7 +37,7 @@ async function main() {
     {
       type: 'list',
       name: 'accion',
-      message: '¿Qué deseas hacer?',
+      message: '¿Qúe deseas hacer?',
       choices: ['Crear personaje', 'Ver personajes', 'Salir'],
     }
   ]);
@@ -56,6 +54,8 @@ async function main() {
 
 // 🧙‍♂️ Crear personaje nuevo
 async function crearPersonaje() {
+  console.log('===='.repeat(20));
+  console.log('🧙‍♂️ Crear nuevo personaje\n');
   const { nombre, tipo } = await inquirer.prompt([
     {
       type: 'input',
@@ -121,7 +121,8 @@ async function crearPersonaje() {
 
   // 💾 Guardar personaje
   await guardarPersonaje(personaje);
-  console.log(`✅ Personaje "${nombre}" creado y guardado correctamente.\n`);
+  console.log(`\n✅ Personaje "${nombre}" creado y guardado correctamente.\n`);
+  console.log('===='.repeat(20));
   await main();
 }
 
@@ -129,19 +130,20 @@ async function crearPersonaje() {
 async function mostrarPersonajes() {
   await db.read();
 
-  if (!db.data.personajes.length) {
+  if (!db.data.length) {
     console.log('\n❌ No hay personajes guardados.\n');
     return await main();
   }
+  console.log('===='.repeat(20));
+  console.log('📋 Lista de personajes:\n');
 
-  console.log('\n📋 Lista de personajes:\n');
-
-  db.data.personajes.forEach((p, i) => {
+  db.data.forEach((p, i) => {
     console.log(`${i + 1}. ${p.nombre} (${p.tipo}) - Nivel ${p.nivel}`);
   });
 
-  console.log('');
+  console.log('===='.repeat(20)+` \n`);
   await main();
+  
 }
 
 // 🚀 Iniciar
