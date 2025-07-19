@@ -3,7 +3,7 @@ const Personaje = require('./Personaje'); // Clase "Personaje" padre para extend
 
 // Creacion de clase Guerrero, subclase de PErsonaje que extiende sus atributos del padre "Personaje"
 class Guerrero extends Personaje {
-  // Constructor y datos que se reciben; inicializamos nivel en 1 por defecto
+  // Constructor y datos que se reciben
   constructor(nombre) { // recibimos el nombre del personaje indicado por el jugador
     super(nombre, 'Guerrero'); // Llamamos a la super clase y le passamos el nombre y al tipo de personaje
 
@@ -49,15 +49,15 @@ class Guerrero extends Personaje {
         });
 
         // Validacion de modificadores de estados temporales
-        if (this.tieneEfecto('fuerza_doble')) { // Validacion de efecto 
-            const efecto = this.efectosTemporales.find(efecto => efecto.nombre === 'fuerza_doble'); // Validacion de nobre del efecto
+        if (this.tieneEfecto('daño_doble')) { // Validacion de efecto 
+            const efecto = this.efectosTemporales.find(efecto => efecto.nombre === 'daño_doble'); // Validacion de nobre del efecto
             const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5; // Aleatoriedad de doble daño
 
             if (debeActivarse) { // si se tiene efecto garantizado
             danio *= 2;
             }
 
-            this.consumirEfecto('fuerza_doble'); // Metodo para consumir el efecto que ya se uso 
+            this.consumirEfecto('daño_doble'); // Metodo para consumir el efecto que ya se uso 
         }
 
         return `${this.nombre} ataca con fuerza causando ${danio} de daño.`; // Mensaje de el daño efectuado con el ataque
@@ -72,10 +72,10 @@ class Guerrero extends Personaje {
 
         // Validacion para mejorar efecto temporal
         if (tieneObjeto) {
-            this.aplicarEfectoTemporal({ nombre: 'fuerza_doble', duracion: 1, modo: 'garantizado'});
+            this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'garantizado'});
             return `${this.nombre} toca el Cuerno de Guerra: ¡el próximo ataque hará daño doble garantizado!`;
         } else {
-            this.aplicarEfectoTemporal({ nombre: 'fuerza_doble', duracion: 1, modo: 'probable' });
+            this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'probable' });
             return `${this.nombre} entra en furia: el próximo ataque podría hacer doble daño.`;
         }
     }
