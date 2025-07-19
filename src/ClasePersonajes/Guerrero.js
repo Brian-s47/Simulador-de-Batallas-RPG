@@ -5,7 +5,7 @@ const Personaje = require('./Personaje'); // Clase "Personaje" padre para extend
 class Guerrero extends Personaje {
   // Constructor y datos que se reciben
   constructor(nombre) { // recibimos el nombre del personaje indicado por el jugador
-    super(nombre, 'Guerrero'); // Llamamos a la super clase y le passamos el nombre y al tipo de personaje
+    super(nombre, 'Guerrero'); // Llamamos a la super clase y le pasamos el nombre y al tipo de personaje
 
     // Asignacion de atribibutos especiales de la subclase
     this.salud += 10; // Mayor salud inicial a la de las demas subclases
@@ -18,7 +18,7 @@ class Guerrero extends Personaje {
       'Usar objeto' // Esta habilidad se conecta con la superclase Personaje ya que es una habilidad que todos los tipos de personaje tienen
     ];
   }
-    // Metodos *****************************************************************************************************************************
+  // Metodos *****************************************************************************************************************************
 
   // Metodo para usar habilidad el cual descenraliza la responzabilidad de ejecutar los ataques y los ejecuta de manera correcta
   usarHabilidad(nombre) {
@@ -32,7 +32,7 @@ class Guerrero extends Personaje {
       case 'Usar objeto':
         return 'Objeto usado';
       default:
-        return 'Habilidad no reconocida';
+        return 'Habilidad no reconocida'; // Opcion de descarte para fallas en el menu
     }
   }
 
@@ -68,7 +68,7 @@ class Guerrero extends Personaje {
 
         // Verificamos si tiene objeto que modifica la habilidad
         const tieneObjeto = this.inventario.getModificadoresPara('Furia') 
-            .some(modificador => modificador.tipo === 'daño' && modificador.valor >= 1);
+        .some(modificador => modificador.tipo === 'daño' && modificador.valor >= 1);
 
         // Validacion para mejorar efecto temporal
         if (tieneObjeto) {

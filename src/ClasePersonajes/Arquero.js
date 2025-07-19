@@ -37,7 +37,7 @@ class Arquero extends Personaje {
       case 'Usar objeto':
         return 'Objeto usado';
       default:
-        return 'Habilidad no reconocida';
+        return 'Habilidad no reconocida'; // Opcion de descarte para fallas en el menu
     }
   }
   // Metodo para habilidad especial 'Flecha perforante'

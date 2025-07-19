@@ -24,6 +24,7 @@ class Personaje {
     this.defensaFisica = 5;
     this.defensaMagica = 5;
     this.efectosTemporales = []; // Efectos temporales que se aplican por habilidades o objetos
+    this.absorcionesPendientes = 0; // para efectos de absorciones completas de daños (Reflejo del mago)
 
     // Relacion bidireccional con inventario ya que debo crear un objeto inventario vacio para iniciar el personaje
     this.inventario = new Inventario();
@@ -38,6 +39,12 @@ class Personaje {
 
   // Metodo para recibir daño 
   recibirDanio(cantidad, tipo = 'fisico') {  // recibimos la cantidad de daño, el tipo de daño por defecto fisico
+  // Verifica absorciones completas de daños
+  if (this.absorcionesPendientes > 0) {
+    this.absorcionesPendientes -= 1;
+    console.log(`${this.nombre} ha absorbido completamente el daño con Reflejo. Le quedan ${this.absorcionesPendientes} cargas.`);
+    return;
+  }
     let defensa = tipo === 'magico' ? this.defensaMagica : this.defensaFisica; // Condicional para elegir el tipo de defensa que se usara para el ataque especifico que se recibira
     const danioReal = Math.max(cantidad - defensa, 0); // Calculo de daño real que se recibo restando la defensa usada difernte para cada personaje.
     this.salud -= danioReal; // se resta el daño recibido con la salud del personaje
@@ -95,6 +102,30 @@ class Personaje {
   consumirEfecto(nombre) {
     this.efectosTemporales = this.efectosTemporales.filter(efecto => efecto.nombre !== nombre);
   }
+
+  // Metodo para validar y aplicar modificacodres
+  getModificadoresPara(habilidad = null, tipoDanio = null) {
+  const equipados = this.getEquipamiento(); // Obtenemos objetos equipados
+  let modificadores = [];
+
+  equipados.forEach(obj => {
+    if (obj.modificadores && Array.isArray(obj.modificadores)) {
+      obj.modificadores.forEach(mod => {
+        const afecta = mod.afecta || {};
+
+        // Filtros por habilidad y tipo de daño
+        const coincideHabilidad = habilidad ? afecta.habilidad === habilidad : true;
+        const coincideTipoDanio = tipoDanio ? afecta.tipoDanio === tipoDanio : true;
+
+        if (coincideHabilidad && coincideTipoDanio) {
+          modificadores.push(mod);
+        }
+      });
+    }
+  });
+
+  return modificadores;
+}
 }
 
 // Zona de exportaciones *********************************************************************************************************************************
