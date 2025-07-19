@@ -1,0 +1,175 @@
+[
+  {
+    "nombre": "Poción de curación",
+    "tipo": "pocion",
+    "manos": 0,
+    "tiposPermitidos": ["Todos"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "curacion",
+        "modo": "aumentar",
+        "valor": 0.3
+      }
+    ]
+  },
+  {
+    "nombre": "espada de una mano",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Ataque básico",
+          "tipoDanio": "fisico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Escudo básico de una mano",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "defensa",
+        "modo": "aumentar",
+        "valor": 20,
+        "afecta": {
+          "tipoDanio": "fisico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Espada de dos manos",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 3,
+        "afecta": {
+          "habilidad": "Ataque básico",
+          "tipoDanio": "fisico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Arco mágico de dos manos",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Flecha arcana",
+          "tipoDanio": "magico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Arco físico de dos manos",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Flecha perforante",
+          "tipoDanio": "fisico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Báculo de fuego de dos manos",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Bola de fuego",
+          "tipoDanio": "magico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Tomo de hielo",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Bola de hielo",
+          "tipoDanio": "magico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Espejo de reflejo",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "absorcion",
+        "modo": "aumentar",
+        "valor": 1,
+        "afecta": {
+          "habilidad": "Reflejo"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Cuerno de guerra",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 1,
+        "afecta": {
+          "habilidad": "Furia"
+        }
+      }
+    ]
+  }
+]
