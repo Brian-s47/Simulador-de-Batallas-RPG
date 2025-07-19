@@ -59,7 +59,7 @@ async function main() {
       choices: [
         { name: chalk.green('✨ Crear personaje'), value: 'crear' },
         { name: chalk.blue('📜 Ver personajes'), value: 'ver' },
-        
+
         { name: chalk.red('❌ Salir'), value: 'salir' }
       ],
     }
@@ -174,59 +174,65 @@ _'._.)' .'.' )_.'
     personaje = new Mago(nombre);
   }
 
-    // 🎒 Selección de 2 objetos iniciales
-    const opcionesIniciales = objetosDisponibles.filter(obj =>
-      obj.disponible && (obj.tiposPermitidos.includes(tipo) || obj.tiposPermitidos.includes('Todos'))
-    );
+  // 🎒 Selección de 2 objetos iniciales
+  const opcionesIniciales = objetosDisponibles.filter(obj =>
+    obj.disponible && (obj.tiposPermitidos.includes(tipo) || obj.tiposPermitidos.includes('Todos'))
+  );
 
-    const { seleccionObjetos } = await inquirer.prompt([
-      {
-        type: 'checkbox',
-        name: 'seleccionObjetos',
-        message: 'Elige 2 objetos iniciales:',
-        choices: opcionesIniciales.map(o => ({ name: o.nombre, value: o })),
-        validate: (respuesta) => {
-          if (respuesta.length !== 2) {
-            return 'Debes seleccionar exactamente 2 objetos.';
-          }
-          return true;
+  const { seleccionObjetos } = await inquirer.prompt([
+    {
+      type: 'checkbox',
+      name: 'seleccionObjetos',
+      message: 'Elige 2 objetos iniciales:',
+      choices: opcionesIniciales.map(o => ({ name: o.nombre, value: o })),
+      validate: (respuesta) => {
+        if (respuesta.length !== 2) {
+          return 'Debes seleccionar exactamente 2 objetos.';
         }
+        return true;
       }
-    ]);
-
-    // ➕ Agregar objetos al inventario
-    seleccionObjetos.forEach(obj => {
-      const instancia = new Objeto(obj);
-      personaje.inventario.agregarObjeto(instancia);
-      if (instancia.tipo === 'equipo') {
-        personaje.inventario.cambiarEquipo(instancia.nombre); // 🔁 aquí usás el nombre del objeto real
-      }
-    });
-
-    // 💾 Guardar personaje
-    await guardarPersonaje(personaje);
-    console.log(`✅ Personaje "${nombre}" creado y guardado correctamente.\n`);
-    await main();
-  }
-
-  // 📋 Ver personajes guardados
-  async function mostrarPersonajes() {
-    await db.read();
-
-    if (!db.data.personajes.length) {
-      console.log('\n❌ No hay personajes guardados.\n');
-      return await main();
     }
+  ]);
 
-    console.log('\n📋 Lista de personajes:\n');
+  // ➕ Agregar objetos al inventario
+  seleccionObjetos.forEach(obj => {
+    const instancia = new Objeto(obj);
+    personaje.inventario.agregarObjeto(instancia);
+    if (instancia.tipo === 'equipo') {
+      personaje.inventario.cambiarEquipo(instancia.nombre);
+    }
+  });
 
-    db.data.personajes.forEach((p, i) => {
-      console.log(`${i + 1}. ${p.nombre} (${p.tipo}) - Nivel ${p.nivel}`);
-    });
+  // 💾 Guardar personaje
+  await guardarPersonaje(personaje);
 
-    console.log('');
-    await main();
+  // ✅ Mensaje personalizado de confirmación
+  console.log(chalk.yellowBright.bold(`\n✅ ¡El personaje de clase ${chalk.magenta(tipo)} llamado ${chalk.cyan(nombre)} ha sido creado exitosamente!\n`));
+
+  await main();
+}
+
+// 📋 Ver personajes guardados
+async function mostrarPersonajes() {
+  await db.read();
+
+  const personajes = db.data.personajes || [];
+
+  if (!personajes.length) {
+    console.log('\n❌ No hay personajes guardados.\n');
+    return await main();
   }
 
-  // 🚀 Iniciar
-  main()
+  console.log('===='.repeat(20));
+  console.log('📋 Lista de personajes:\n');
+
+  personajes.forEach((p, i) => {
+    console.log(`${i + 1}. ${p.nombre} (${p.tipo}) - Nivel ${p.nivel}`);
+  });
+
+  console.log('===='.repeat(20) + `\n`);
+  await main();
+}
+
+// 🚀 Iniciar
+main();
