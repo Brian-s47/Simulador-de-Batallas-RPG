@@ -1,4 +1,3 @@
-
 // Zona de importaciones ********************************************************************************************************************************
 const { v4: uuidv4 } = require('uuid'); //Funcion para generar Id unico por personaje para asi manejar mejor el control de cada uno
 const Inventario = require('../ClaseInventario/Inventario');  // Clase inventario ya que cada perosnaje va a tener su propio inventario independiente
@@ -24,12 +23,13 @@ class Personaje {
     this.ataque = 10 + (nivel - 1) * 2;
     this.defensaFisica = 5;
     this.defensaMagica = 5;
+    this.efectosTemporales = []; // Efectos temporales que se aplican por habilidades o objetos
 
     // Relacion bidireccional con inventario ya que debo crear un objeto inventario vacio para iniciar el personaje
     this.inventario = new Inventario();
   }
 
-  // Metodos *********************************************************************************************************************************************
+  // Metodos *******************************************************************************************************************************
 
   // Forzamos metodo abstracto ya que cada subclase va a definir como atacar por aparte a su manera especifica
   atacar(objetivo) {
@@ -80,7 +80,22 @@ class Personaje {
   getEquipamiento() {
     return this.inventario.getEquipados();
   }
+
+  // Metodo para aplicar efectos temporales
+  aplicarEfectoTemporal(efecto) {
+    this.efectosTemporales.push(efecto); // Pushear efecto a efectos temporales
+  }
+
+  // Metodo para verificar el efecto y el nombre del efecto si se tiene 
+  tieneEfecto(nombre) {
+    return this.efectosTemporales.some(efecto => efecto.nombre === nombre);
+  }
+
+  // Metodo para consumir el efecto temporal
+  consumirEfecto(nombre) {
+    this.efectosTemporales = this.efectosTemporales.filter(efecto => efecto.nombre !== nombre);
+  }
 }
 
-// Zona de exportaciones **************************************************************************************************************************************
+// Zona de exportaciones *********************************************************************************************************************************
 module.exports = Personaje;
