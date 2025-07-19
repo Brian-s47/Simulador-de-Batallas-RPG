@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const chalk = require('chalk');
 const path = require('path');
 const { Low, JSONFile } = require('lowdb');
 
@@ -31,28 +32,51 @@ async function initDB() {
   await db.write();
 }
 
+// 🎨 Función para mostrar el mensaje de bienvenida con arte ASCII
+function mostrarBienvenida() {
+  console.clear();
+console.log(chalk.yellow.bold(`
+╔══════════════════════════════════════════╗
+║     🛡️  SIMULADOR DE BATALLAS RPG 🛡️       ║
+╚══════════════════════════════════════════╝
+
+  Elige tu destino: Guerrero, Mago o Arquero  
+Prepárate para la batalla más grande de tu vida...
+`));
+}
+
 // 🎮 Menú principal
 async function main() {
+  mostrarBienvenida(); // Mostrar el mensaje de bienvenida con arte
+
   await initDB();
 
   const { accion } = await inquirer.prompt([
     {
       type: 'list',
       name: 'accion',
-      message: '¿Qué deseas hacer?',
-      choices: ['Crear personaje', 'Ver personajes', 'Salir'],
+      message: chalk.cyan.bold('¿Qué deseas hacer?'),
+      choices: [
+        { name: chalk.green('✨ Crear personaje'), value: 'crear' },
+        { name: chalk.blue('📜 Ver personajes'), value: 'ver' },
+        
+        { name: chalk.red('❌ Salir'), value: 'salir' }
+      ],
     }
   ]);
 
-  if (accion === 'Crear personaje') {
+  if (accion === 'crear') {
+    console.log(chalk.greenBright('\n🔨 Vamos a crear un nuevo personaje...\n'));
     await crearPersonaje();
-  } else if (accion === 'Ver personajes') {
+  } else if (accion === 'ver') {
+    console.log(chalk.blueBright('\n📖 Aquí están los personajes guardados:\n'));
     await mostrarPersonajes();
   } else {
-    console.log('👋 ¡Hasta luego!');
+    console.log(chalk.redBright('\n👋 ¡Hasta luego, aventurero!\n'));
     process.exit();
   }
 }
+
 
 // 🧙‍♂️ Crear personaje nuevo
 async function crearPersonaje() {
@@ -73,10 +97,54 @@ async function crearPersonaje() {
   let personaje;
 
   if (tipo === 'Guerrero') {
+console.log(chalk.red.bold(`
+      ,   A           {}
+     / \\, | ,        .--.
+    |    =|= >      /.--.\\
+     \\ / \` | \`      |====|
+      \`   |         |\`::\`|
+          |     .-;\\..../\`;-.
+         /\\\\ /  |...::...|  \\
+         |:'\\ |   /'''::'''\\   |
+          \\ /\\;-,/\\   ::   /\\--;     
+          |\\ <\` >  >._::_.<,<__>
+          | \`""\`  /   ^^   \\|  |
+          |       |        |\\::/
+          |       |        |/|||
+          |       |___/\\___| '''
+          |        \\_ || _/
+          |        <_ >< _>
+          |        |  ||  |
+          |        |  ||  |
+          |       _\\.:||:./_
+          |      /____/\\____\\
+`));
     personaje = new Guerrero(nombre);
   }
 
   if (tipo === 'Arquero') {
+console.log(chalk.green.bold(`
+           ,       ,
+          /(       )\\
+         (  \\___/  )
+         |  (_)  (_)\\
+         \\    _|    |
+         /\\__/   \\__/\\
+        /__|     |__\\
+         | |  |  | |
+         |_|  |  |_|
+         |||  |  |||    🏹
+         |||  |  |||   /|
+         | |  |  | |  / |
+         |_|__|__|_| /__|
+        (__)      (__)
+     ===/  \\\\====//  \\\\===
+        ||       ||
+        ||       ||
+     __/||__   __||\\__
+    (______) (______)
+   ARQUERO SOMBRA — El acechador del bosque oscuro
+`));
     const { defensa } = await inquirer.prompt({
       type: 'list',
       name: 'defensa',
@@ -87,62 +155,78 @@ async function crearPersonaje() {
   }
 
   if (tipo === 'Mago') {
+    console.log(chalk.blueBright.bold(String.raw`
+          ____      
+        .'* *.'
+     __/_*_*(_
+    / _______ \\
+   _\\_)/___\\(_/_ 
+  / _((\\- -/))_ \\
+  \\ \\())(-)(()/ /
+   ' \\(((()))/ '
+  / ' \\)).))/ ' \\
+ / _ \\ - | - /_  \\
+(   ( .;''';. .'  )
+_'._.)' .'.' )_.'
+  /_/   |_|   \_\\
+   MAGO MÍSTICO  
+    `));
     personaje = new Mago(nombre);
   }
 
-  // 🎒 Selección de 2 objetos iniciales
-  const opcionesIniciales = objetosDisponibles.filter(obj =>
-    obj.disponible && (obj.tiposPermitidos.includes(tipo) || obj.tiposPermitidos.includes('Todos'))
-  );
+    // 🎒 Selección de 2 objetos iniciales
+    const opcionesIniciales = objetosDisponibles.filter(obj =>
+      obj.disponible && (obj.tiposPermitidos.includes(tipo) || obj.tiposPermitidos.includes('Todos'))
+    );
 
-  const { seleccionObjetos } = await inquirer.prompt([
-    {
-      type: 'checkbox',
-      name: 'seleccionObjetos',
-      message: 'Elige 2 objetos iniciales:',
-      choices: opcionesIniciales.map(o => ({ name: o.nombre, value: o })),
-      validate: (respuesta) => {
-        if (respuesta.length !== 2) {
-          return 'Debes seleccionar exactamente 2 objetos.';
+    const { seleccionObjetos } = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'seleccionObjetos',
+        message: 'Elige 2 objetos iniciales:',
+        choices: opcionesIniciales.map(o => ({ name: o.nombre, value: o })),
+        validate: (respuesta) => {
+          if (respuesta.length !== 2) {
+            return 'Debes seleccionar exactamente 2 objetos.';
+          }
+          return true;
         }
-        return true;
       }
-    }
-  ]);
+    ]);
 
-  // ➕ Agregar objetos al inventario
-  seleccionObjetos.forEach(obj => {
-    const instancia = new Objeto(obj);
-    personaje.inventario.agregarObjeto(instancia);
-    if (instancia.tipo === 'equipo') {
-      personaje.inventario.cambiarEquipo(instancia.nombre); // 🔁 aquí usás el nombre del objeto real
-    }
-  });
+    // ➕ Agregar objetos al inventario
+    seleccionObjetos.forEach(obj => {
+      const instancia = new Objeto(obj);
+      personaje.inventario.agregarObjeto(instancia);
+      if (instancia.tipo === 'equipo') {
+        personaje.inventario.cambiarEquipo(instancia.nombre); // 🔁 aquí usás el nombre del objeto real
+      }
+    });
 
-  // 💾 Guardar personaje
-  await guardarPersonaje(personaje);
-  console.log(`✅ Personaje "${nombre}" creado y guardado correctamente.\n`);
-  await main();
-}
-
-// 📋 Ver personajes guardados
-async function mostrarPersonajes() {
-  await db.read();
-
-  if (!db.data.personajes.length) {
-    console.log('\n❌ No hay personajes guardados.\n');
-    return await main();
+    // 💾 Guardar personaje
+    await guardarPersonaje(personaje);
+    console.log(`✅ Personaje "${nombre}" creado y guardado correctamente.\n`);
+    await main();
   }
 
-  console.log('\n📋 Lista de personajes:\n');
+  // 📋 Ver personajes guardados
+  async function mostrarPersonajes() {
+    await db.read();
 
-  db.data.personajes.forEach((p, i) => {
-    console.log(`${i + 1}. ${p.nombre} (${p.tipo}) - Nivel ${p.nivel}`);
-  });
+    if (!db.data.personajes.length) {
+      console.log('\n❌ No hay personajes guardados.\n');
+      return await main();
+    }
 
-  console.log('');
-  await main();
-}
+    console.log('\n📋 Lista de personajes:\n');
 
-// 🚀 Iniciar
-main();
+    db.data.personajes.forEach((p, i) => {
+      console.log(`${i + 1}. ${p.nombre} (${p.tipo}) - Nivel ${p.nivel}`);
+    });
+
+    console.log('');
+    await main();
+  }
+
+  // 🚀 Iniciar
+  main()
