@@ -60,7 +60,7 @@ async function main() {
       message: chalk.cyan.bold('¿Qué deseas hacer?'),
       choices: [
         { name: chalk.green('✨ Crear personaje'), value: 'crear' },
-        { name: chalk.blue('📜 Ver personajes'), value: 'ver' },
+        { name: chalk.blue('📜 Vacio para batallas :)'), value: 'nada' },
         { name: chalk.yellow('🔥  Gestionar personaje'), value: 'gestionar' },
         { name: chalk.red('❌ Salir'), value: 'salir' }
       ],
@@ -310,3 +310,13 @@ async function gestionarPersonaje() {
 
 // 🚀 Iniciar
 main();
+
+
+
+
+
+const goku = new Guerrero('Goku');
+
+console.log(`Nivel inicial: ${goku.nivel}`);
+goku.ganarExperiencia(120); // Esto debería subirlo al nivel 2
+goku.ganarExperiencia(200); // Esto podría subirlo otro nivel según la fórmula
