@@ -1,8 +1,58 @@
 {
   "personajes": [
     {
-      "id": "fb8f7e19-51d5-4f30-9808-aa85c376de65",
-      "nombre": "cdscdcd",
+      "id": "a8c1a7de-cea6-4f55-b19f-060479825ea9",
+      "nombre": "gfgfgfg",
+      "tipo": "Guerrero",
+      "nivel": 1,
+      "salud": 110,
+      "saludMaxima": 100,
+      "ataque": 10,
+      "defensaFisica": 7,
+      "defensaMagica": 5,
+      "efectosTemporales": [],
+      "inventario": [
+        {
+          "nombre": "Poción de curación",
+          "tipo": "pocion",
+          "manos": 0,
+          "tiposPermitidos": [
+            "Todos"
+          ],
+          "disponible": true,
+          "modificadores": [
+            {
+              "tipo": "curacion",
+              "modo": "aumentar",
+              "valor": 0.3
+            }
+          ]
+        },
+        {
+          "nombre": "espada de una mano",
+          "tipo": "equipo",
+          "manos": 1,
+          "tiposPermitidos": [
+            "Guerrero"
+          ],
+          "disponible": false,
+          "modificadores": [
+            {
+              "tipo": "daño",
+              "modo": "aumentar",
+              "valor": 2,
+              "afecta": {
+                "habilidad": "Ataque básico",
+                "tipoDanio": "fisico"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3f6fa18d-9a5f-4b4e-bf8c-b1a621deaf13",
+      "nombre": "holaaaaaa",
       "tipo": "Arquero",
       "nivel": 1,
       "salud": 105,
@@ -11,49 +61,44 @@
       "defensaFisica": 7,
       "defensaMagica": 5,
       "efectosTemporales": [],
-      "inventario": {
-        "objetos": [
-          {
-            "nombre": "Poción de curación",
-            "tipo": "pocion",
-            "manos": 0,
-            "tiposPermitidos": [
-              "Todos"
-            ],
-            "disponible": true,
-            "modificadores": [
-              {
-                "tipo": "curacion",
-                "modo": "aumentar",
-                "valor": 0.3
+      "inventario": [
+        {
+          "nombre": "Poción de curación",
+          "tipo": "pocion",
+          "manos": 0,
+          "tiposPermitidos": [
+            "Todos"
+          ],
+          "disponible": true,
+          "modificadores": [
+            {
+              "tipo": "curacion",
+              "modo": "aumentar",
+              "valor": 0.3
+            }
+          ]
+        },
+        {
+          "nombre": "espada de una mano",
+          "tipo": "equipo",
+          "manos": 1,
+          "tiposPermitidos": [
+            "Guerrero"
+          ],
+          "disponible": false,
+          "modificadores": [
+            {
+              "tipo": "daño",
+              "modo": "aumentar",
+              "valor": 2,
+              "afecta": {
+                "habilidad": "Ataque básico",
+                "tipoDanio": "fisico"
               }
-            ]
-          },
-          {
-            "nombre": "Arco mágico de dos manos",
-            "tipo": "equipo",
-            "manos": 2,
-            "tiposPermitidos": [
-              "Arquero"
-            ],
-            "disponible": true,
-            "modificadores": [
-              {
-                "tipo": "daño",
-                "modo": "aumentar",
-                "valor": 2,
-                "afecta": {
-                  "habilidad": "Flecha arcana",
-                  "tipoDanio": "magico"
-                }
-              }
-            ]
-          }
-        ],
-        "equipados": [
-          "Arco mágico de dos manos"
-        ]
-      }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

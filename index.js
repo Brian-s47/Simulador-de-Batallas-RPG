@@ -12,8 +12,10 @@ const Objeto = require('./src/ClaseInventario/Objeto');
 const {
   serializarPersonaje,
   deserializarPersonaje,
+  cargarPersonajes,
   guardarPersonaje,
-  eliminarPersonaje
+  eliminarPersonaje,
+
 } = require('./utils/personajeUtils');
 
 // 📁 Base de datos
@@ -35,7 +37,7 @@ async function initDB() {
 // 🎨 Función para mostrar el mensaje de bienvenida con arte ASCII
 function mostrarBienvenida() {
   console.clear();
-console.log(chalk.yellow.bold(`
+  console.log(chalk.yellow.bold(`
 ╔══════════════════════════════════════════╗
 ║     🛡️  SIMULADOR DE BATALLAS RPG 🛡️       ║
 ╚══════════════════════════════════════════╝
@@ -59,7 +61,7 @@ async function main() {
       choices: [
         { name: chalk.green('✨ Crear personaje'), value: 'crear' },
         { name: chalk.blue('📜 Ver personajes'), value: 'ver' },
-
+        { name: chalk.yellow('🔥  Gestionar personaje'), value: 'gestionar' },
         { name: chalk.red('❌ Salir'), value: 'salir' }
       ],
     }
@@ -71,6 +73,9 @@ async function main() {
   } else if (accion === 'ver') {
     console.log(chalk.blueBright('\n📖 Aquí están los personajes guardados:\n'));
     await mostrarPersonajes();
+  } else if (accion === 'gestionar') {
+    console.log(chalk.yellowBright('\n🔧 Vamos a gestionar tus personajes...\n'));
+    await gestionarPersonaje();
   } else {
     console.log(chalk.redBright('\n👋 ¡Hasta luego, aventurero!\n'));
     process.exit();
@@ -97,7 +102,7 @@ async function crearPersonaje() {
   let personaje;
 
   if (tipo === 'Guerrero') {
-console.log(chalk.red.bold(`
+    console.log(chalk.red.bold(`
       ,   A           {}
      / \\, | ,        .--.
     |    =|= >      /.--.\\
@@ -123,7 +128,7 @@ console.log(chalk.red.bold(`
   }
 
   if (tipo === 'Arquero') {
-console.log(chalk.green.bold(`
+    console.log(chalk.green.bold(`
            ,       ,
           /(       )\\
          (  \\___/  )
@@ -174,18 +179,17 @@ _'._.)' .'.' )_.'
     personaje = new Mago(nombre);
   }
 
-  // 🎒 Selección de 2 objetos iniciales
-  const opcionesIniciales = objetosDisponibles.filter(obj =>
-    obj.disponible && (obj.tiposPermitidos.includes(tipo) || obj.tiposPermitidos.includes('Todos'))
-  );
-
+  // 🎒 Selección de objetos iniciales
   const { seleccionObjetos } = await inquirer.prompt([
     {
       type: 'checkbox',
       name: 'seleccionObjetos',
-      message: 'Elige 2 objetos iniciales:',
-      choices: opcionesIniciales.map(o => ({ name: o.nombre, value: o })),
-      validate: (respuesta) => {
+      message: 'Selecciona 2 objetos iniciales:',
+      choices: objetosDisponibles.map(obj => ({
+        name: obj.nombre,
+        value: obj.nombre
+      })),
+      validate: function (respuesta) {
         if (respuesta.length !== 2) {
           return 'Debes seleccionar exactamente 2 objetos.';
         }
@@ -194,23 +198,35 @@ _'._.)' .'.' )_.'
     }
   ]);
 
-  // ➕ Agregar objetos al inventario
-  seleccionObjetos.forEach(obj => {
-    const instancia = new Objeto(obj);
-    personaje.inventario.agregarObjeto(instancia);
-    if (instancia.tipo === 'equipo') {
-      personaje.inventario.cambiarEquipo(instancia.nombre);
+  const objetosSeleccionados = seleccionObjetos.map(nombre => {
+    const datos = objetosDisponibles.find(obj => obj.nombre === nombre);
+
+    if (!datos) {
+      console.error(`❌ No se encontró el objeto con nombre "${nombre}".`);
+      return null;
+    }
+
+    return new Objeto(datos);
+  }).filter(obj => obj !== null);
+
+  // Agregar al inventario del personaje
+  objetosSeleccionados.forEach(obj => {
+    personaje.inventario.agregarObjeto(obj);
+
+    if (obj.tipo === 'equipo') {
+      personaje.inventario.cambiarEquipo(obj.nombre);
     }
   });
 
   // 💾 Guardar personaje
   await guardarPersonaje(personaje);
 
-  // ✅ Mensaje personalizado de confirmación
+  // ✅ Confirmación
   console.log(chalk.yellowBright.bold(`\n✅ ¡El personaje de clase ${chalk.magenta(tipo)} llamado ${chalk.cyan(nombre)} ha sido creado exitosamente!\n`));
 
   await main();
 }
+
 
 // 📋 Ver personajes guardados
 async function mostrarPersonajes() {
@@ -232,6 +248,64 @@ async function mostrarPersonajes() {
 
   console.log('===='.repeat(20) + `\n`);
   await main();
+}
+
+
+async function gestionarPersonaje() {
+  const personajes = await cargarPersonajes();
+  if (personajes.length === 0) {
+    console.log("❌ No hay personajes para gestionar.");
+    return;
+  }
+
+  // Selección del personaje
+  const { seleccionado } = await inquirer.prompt({
+    type: "list",
+    name: "seleccionado",
+    message: "Selecciona un personaje:",
+    choices: personajes.map(p => `${p.nombre} (${p.tipo})`)
+  });
+
+  const personaje = personajes.find(p => `${p.nombre} (${p.tipo})` === seleccionado);
+
+  // Opciones de gestión
+  const { accion } = await inquirer.prompt({
+    type: "list",
+    name: "accion",
+    message: `¿Qué deseas hacer con ${personaje.nombre}?`,
+    choices: [
+      "Ver detalles",
+      "Cambiar nombre",
+      "Eliminar personaje",
+      "Volver"
+    ]
+  });
+
+  if (accion === "Ver detalles") {
+    console.log(JSON.stringify(personaje, null, 2));
+  } else if (accion === "Cambiar nombre") {
+    const { nuevoNombre } = await inquirer.prompt({
+      type: "input",
+      name: "nuevoNombre",
+      message: "Ingresa el nuevo nombre:"
+    });
+    personaje.nombre = nuevoNombre;
+    await guardarPersonajes(personajes); // usa función del personajeUtils
+    console.log("✅ Nombre actualizado.");
+  } else if (accion === "Eliminar personaje") {
+    const { confirmacion } = await inquirer.prompt({
+      type: "confirm",
+      name: "confirmacion",
+      message: `¿Estás seguro de eliminar a ${personaje.nombre}?`
+    });
+
+    if (confirmacion) {
+      await eliminarPersonaje(personaje.id); // usa función de personajeUtils.js
+      console.log("🗑️ Personaje eliminado.");
+    }
+  }
+
+  await gestionarPersonaje(); // permite volver a gestionar otro personaje
 }
 
 // 🚀 Iniciar
