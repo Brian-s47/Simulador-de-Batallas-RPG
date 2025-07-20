@@ -34,22 +34,53 @@ async function initDB() {
   await db.write();
 }
 
-// 🎨 Función para mostrar el mensaje de bienvenida con arte ASCII
+// funcion de emnsake de bienvenida
 function mostrarBienvenida() {
   console.clear();
   console.log(chalk.yellow.bold(`
-╔══════════════════════════════════════════╗
-║     🛡️  SIMULADOR DE BATALLAS RPG 🛡️       ║
-╚══════════════════════════════════════════╝
+╔════════════════════════════════════════════════════════════╗
+║                🛡️  SIMULADOR DE BATALLAS RPG 🛡️              ║
+╚════════════════════════════════════════════════════════════╝
 
-  Elige tu destino: Guerrero, Mago o Arquero  
-Prepárate para la batalla más grande de tu vida...
+Bienvenido, aventurero...
+
+"${chalk.cyan('Simulador de Batallas RPG')}" es un juego de consola en el que 
+tomarás el rol de un héroe legendario. Tendrás que elegir entre tres clases:
+
+${chalk.redBright('• Guerrero')} — Maestro del combate cuerpo a cuerpo y defensor implacable contra ataques físicos.
+
+${chalk.blueBright('• Mago')} — Dominador de las artes arcanas: fuego, hielo y poderosas ilusiones para alterar la realidad.
+
+${chalk.greenBright('• Arquero')} — Estratega versátil, experto en daño a distancia y con afinidad tanto física como mágica.
+
+Cada decisión te llevará más profundo a una antigua mazmorra repleta de enemigos,
+trampas y tesoros. Cada nivel superado será recompensado, pero si caes en combate...
+
+${chalk.red('¡No habrá segundas oportunidades!')} Tu historia terminará, y deberás forjar una nueva.
+
+Prepárate para enfrentar lo desconocido, ascender de nivel, y escribir tu leyenda.
+
+${chalk.bold('¿Qué camino elegirás? ¿La magia, la defensa o la estrategia?')}
+El destino te espera...
+
 `));
 }
+// Funcion para esperar a que el jugador inicie luego del mensaje de bienvenida presionando una tecla
+async function esperarTecla() {
+  await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'continuar',
+      message: chalk.gray('\nPresiona Enter para continuar...'),
+    }
+  ]);
+}
+
 
 // 🎮 Menú principal
 async function main() {
   mostrarBienvenida(); // Mostrar el mensaje de bienvenida con arte
+  await esperarTecla();  // funcion para esperar y continuar
 
   await initDB();
 
