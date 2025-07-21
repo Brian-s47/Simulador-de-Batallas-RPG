@@ -80,7 +80,6 @@ async function guardarPersonaje(personaje) {
   }
 
   await db.write();
-  console.log(`✅ Personaje "${personaje.nombre}" guardado correctamente.`);
 }
 
 // ☠️ Eliminar personaje (por ID)
