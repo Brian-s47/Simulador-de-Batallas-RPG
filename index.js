@@ -83,43 +83,41 @@ async function esperarTecla() {
 // 🎮 Menú principal
 async function main() {
   mostrarBienvenida(); // Mostrar el mensaje de bienvenida con arte
-  await esperarTecla(); // funcion para esperar y continuar
+  await esperarTecla(); // función para esperar y continuar
 
   await initDB();
 
-  const { accion } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "accion",
-      message: chalk.cyan.bold("¿Qué deseas hacer?"),
-      choices: [
-        { name: chalk.green("✨ Crear personaje"), value: "crear" },
-        { name: chalk.yellow("🔥  Gestionar personaje"), value: "gestionar" },
-        { name: chalk.red("❌ Salir"), value: "salir" },
-      ],
-    },
-  ]);
+  let salir = false;
 
-  if (accion === "crear") {
-    console.log(
-      chalk.greenBright("\n🔨 Vamos a crear un nuevo personaje...\n")
-    );
-    await crearPersonaje();
-    await main();
-  } else if (accion === "ver") {
-    console.log(
-      chalk.blueBright("\n📖 Aquí están los personajes guardados:\n")
-    );
-    await mostrarPersonajes();
-  } else if (accion === "gestionar") {
-    console.log(
-      chalk.yellowBright("\n🔧 Vamos a gestionar tus personajes...\n")
-    );
-    await gestionarPersonaje();
-  } else {
-    console.log(chalk.redBright("\n👋 ¡Hasta luego, aventurero!\n"));
-    process.exit();
+  while (!salir) {
+    const { accion } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "accion",
+        message: chalk.cyan.bold("¿Qué deseas hacer?"),
+        choices: [
+          { name: chalk.green("✨ Crear personaje"), value: "crear" },
+          { name: chalk.yellow("🔥  Gestionar personaje"), value: "gestionar" },
+          { name: chalk.red("❌ Salir"), value: "salir" },
+        ],
+      },
+    ]);
+
+    if (accion === "crear") {
+      console.log(chalk.greenBright("\n🔨 Vamos a crear un nuevo personaje...\n"));
+      await crearPersonaje();
+
+    } else if (accion === "gestionar") {
+      console.log(chalk.yellowBright("\n🔧 Vamos a gestionar tus personajes...\n"));
+      await gestionarPersonaje();
+
+    } else if (accion === "salir") {
+      console.log(chalk.redBright("\n👋 ¡Hasta luego, aventurero!\n"));
+      salir = true;
+    }
   }
+
+  process.exit();
 }
 
 // 🚀 Iniciar

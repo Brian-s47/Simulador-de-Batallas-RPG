@@ -64,7 +64,7 @@ const { accion } = await inquirer.prompt({
 
   // Permite seguir gestionando si no se elige "Volver"
   if (accion !== "Volver") {
-    return
+    return gestionarPersonaje();
   } 
 }
 
