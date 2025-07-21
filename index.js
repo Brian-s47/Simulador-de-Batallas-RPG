@@ -297,7 +297,9 @@ async function gestionarPersonaje() {
     choices: personajes.map(p => `${p.nombre} (${p.tipo})`)
   });
 
-  const personaje = personajes.find(p => `${p.nombre} (${p.tipo})` === seleccionado);
+  const personajePlano = personajes.find(p => `${p.nombre} (${p.tipo})` === seleccionado);
+  const personaje = deserializarPersonaje(personajePlano); // ✅ aquí se convierte a instancia completa
+
 
   // Opciones de gestión
   const { accion } = await inquirer.prompt({

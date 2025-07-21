@@ -78,6 +78,24 @@ class Inventario {
       this.objetosEquipados.push(nuevoObjeto);
     }
   }
+    // Método estático para reconstruir el inventario desde datos planos
+  static deserializar(objetosPlano, objetosDisponibles) {
+    const objetosReconstruidos = objetosPlano.map(objData => {
+      const dataOriginal = objetosDisponibles.find(o => o.nombre === objData.nombre);
+      if (!dataOriginal) {
+        console.warn(`⚠️ Objeto "${objData.nombre}" no encontrado en objetosDisponibles. Se usará data parcial.`);
+        return objData;
+      }
+
+      return {
+        ...dataOriginal,
+        ...objData
+      };
+    });
+
+    return new Inventario(objetosReconstruidos);
+  }
+
 }
 
 // Exportamos la clase Inventario para ser usada por los personajes
