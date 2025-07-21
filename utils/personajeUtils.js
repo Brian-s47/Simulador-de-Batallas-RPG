@@ -1,6 +1,5 @@
 const path = require('path');
 const { Low, JSONFile } = require('lowdb');
-const fs = require('fs');
 
 const Guerrero = require('../src/ClasePersonajes/Guerrero');
 const Arquero = require('../src/ClasePersonajes/Arquero');
@@ -69,15 +68,15 @@ function deserializarPersonaje(data) {
 // 💾 Guardar personaje actualizado (por ID)
 async function guardarPersonaje(personaje) {
   await db.read();
-  db.data ||= { personajes: [] };
+  db.data ||= [];
 
-  const index = db.data.personajes.findIndex(p => p.id === personaje.id);
+  const index = db.data.findIndex(p => p.id === personaje.id);
   const serializado = serializarPersonaje(personaje);
 
   if (index >= 0) {
-    db.data.personajes[index] = serializado;
+    db.data[index] = serializado;
   } else {
-    db.data.personajes.push(serializado);
+    db.data.push(serializado);
   }
 
   await db.write();
@@ -87,9 +86,9 @@ async function guardarPersonaje(personaje) {
 // ☠️ Eliminar personaje (por ID)
 async function eliminarPersonaje(id) {
   await db.read();
-  db.data ||= { personajes: [] };
+  db.data ||= [];
 
-  db.data.personajes = db.data.personajes.filter(p => p.id !== id);
+  db.data = db.data.filter(p => p.id !== id);
   await db.write();
   console.log(`🗑️ Personaje eliminado correctamente.`);
 }
@@ -100,7 +99,7 @@ async function cargarPersonajes() {
   const adapter = new JSONFile(dbPath);
   const db = new Low(adapter);
   await db.read();
-  return db.data.personajes || [];
+  return db.data || [];
 }
 
 // 🧾 Exportar funciones

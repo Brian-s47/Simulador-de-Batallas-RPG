@@ -30,7 +30,7 @@ const objetosDisponibles = require('./data/objetos.json');
 // 🧠 Inicializar base de datos
 async function initDB() {
   await db.read();
-  db.data ||= { personajes: [] };
+  db.data ||= [];
   await db.write();
 }
 
@@ -263,7 +263,7 @@ _'._.)' .'.' )_.'
 async function mostrarPersonajes() {
   await db.read();
 
-  const personajes = db.data.personajes || [];
+  const personajes = db.data || [];
 
   if (!personajes.length) {
     console.log('\n❌ No hay personajes guardados.\n');
@@ -321,7 +321,7 @@ async function gestionarPersonaje() {
       message: "Ingresa el nuevo nombre:"
     });
     personaje.nombre = nuevoNombre;
-    await guardarPersonajes(personajes); // usa función del personajeUtils
+    await guardarPersonaje(personaje); // usa función del personajeUtils
     console.log("✅ Nombre actualizado.");
   } else if (accion === "Eliminar personaje") {
     const { confirmacion } = await inquirer.prompt({
@@ -346,8 +346,8 @@ main();
 
 
 
-const goku = new Guerrero('Goku');
+// const goku = new Guerrero('Goku');
 
-console.log(`Nivel inicial: ${goku.nivel}`);
-goku.ganarExperiencia(120); // Esto debería subirlo al nivel 2
-goku.ganarExperiencia(200); // Esto podría subirlo otro nivel según la fórmula
+// console.log(`Nivel inicial: ${goku.nivel}`);
+// goku.ganarExperiencia(120); // Esto debería subirlo al nivel 2
+// goku.ganarExperiencia(200); // Esto podría subirlo otro nivel según la fórmula
