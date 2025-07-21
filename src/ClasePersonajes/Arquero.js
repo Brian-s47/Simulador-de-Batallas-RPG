@@ -54,7 +54,8 @@ class Arquero extends Personaje {
 
     if (this.tieneEfecto('daño_doble')) {
       const efecto = this.efectosTemporales.find(e => e.nombre === 'daño_doble');
-      const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5;
+      const probabilidad = efecto.probabilidad || 0.5;
+      const debeActivarse = Math.random() < probabilidad;
       if (debeActivarse) danio *= 2;
       this.consumirEfecto('daño_doble');
     }
@@ -78,7 +79,9 @@ class Arquero extends Personaje {
 
     if (this.tieneEfecto('daño_doble')) {
       const efecto = this.efectosTemporales.find(e => e.nombre === 'daño_doble');
-      const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5;
+      const probabilidad = efecto.probabilidad || 0.5;
+      const debeActivarse = Math.random() < probabilidad;
+
       if (debeActivarse) danio *= 2;
       this.consumirEfecto('daño_doble');
     }
@@ -88,17 +91,25 @@ class Arquero extends Personaje {
   }
 
   usarApuntar() {
-    const tieneObjeto = this.inventario.getModificadoresPara('Apuntar')
-      .some(mod => mod.tipo === 'daño' && mod.valor >= 1);
-
-    if (tieneObjeto) {
-      this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'garantizado' });
-      return `${this.nombre} usa mira precisa: ¡el próximo ataque hará daño doble garantizado!`;
-    } else {
-      this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'probable' });
-      return `${this.nombre} apunta con calma: el próximo ataque podría hacer el doble de daño.`;
-    }
+    let probabilidadExtra = 0;
+  
+    const modificadores = this.inventario.getModificadoresPara('Apuntar');
+    modificadores.forEach(mod => {
+      if (mod.tipo === 'daño' && mod.modo === 'aumentar') {
+        probabilidadExtra += mod.valor;
+      }
+    });
+  
+    this.aplicarEfectoTemporal({
+      nombre: 'daño_doble',
+      duracion: 1,
+      modo: 'probable',
+      probabilidad: 0.5 + (probabilidadExtra / 100)
+    });
+  
+    return `${this.nombre} apunta con precisión: el próximo ataque tiene ${(50 + probabilidadExtra)}% de probabilidad de hacer daño doble.`;
   }
+  
 }
 
 module.exports = Arquero;
