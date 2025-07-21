@@ -1,157 +1,7 @@
 [
   {
-    "id": "b6386ee6-764d-4dc2-9b57-1cd17dfa0868",
-    "nombre": "Danilo",
-    "tipo": "Guerrero",
-    "nivel": 2,
-    "salud": 110,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 7,
-    "defensaMagica": 5,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 3,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "76dfd085-4642-45bf-b47e-9cafff3a5195",
-    "nombre": "Isaac",
-    "tipo": "Guerrero",
-    "nivel": 4,
-    "salud": 110,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 7,
-    "defensaMagica": 5,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "6469f353-b60b-429f-b6a7-ca80dbeb6ffb",
-    "nombre": "holiwis",
-    "tipo": "Mago",
-    "nivel": 5,
-    "salud": 100,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 5,
-    "defensaMagica": 7,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "e6f71b69-0613-4c71-a936-8a2e4cf2c2ee",
-    "nombre": "Brian",
+    "id": "de53d04a-8246-4490-b808-98c0578571be",
+    "nombre": "Phiinx",
     "tipo": "Guerrero",
     "nivel": 1,
     "salud": 110,
@@ -163,6 +13,7 @@
     "inventario": [
       {
         "nombre": "Poción de curación",
+        "nivel": 1,
         "tipo": "pocion",
         "manos": 0,
         "tiposPermitidos": [
@@ -175,12 +26,14 @@
             "modo": "aumentar",
             "valor": 0.3
           }
-        ]
+        ],
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
       },
       {
-        "nombre": "espada de una mano",
+        "nombre": "Espada de dos manos",
+        "nivel": 1,
         "tipo": "equipo",
-        "manos": 1,
+        "manos": 2,
         "tiposPermitidos": [
           "Guerrero"
         ],
@@ -189,63 +42,14 @@
           {
             "tipo": "daño",
             "modo": "aumentar",
-            "valor": 2,
+            "valor": 3,
             "afecta": {
               "habilidad": "Ataque básico",
               "tipoDanio": "fisico"
             }
           }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "00b39cb6-52d4-4fe8-a9f3-ccb45426e56d",
-    "nombre": "holaaaaaa",
-    "tipo": "Mago",
-    "nivel": 1,
-    "salud": 100,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 5,
-    "defensaMagica": 7,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
         ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
+        "descripcion": "Gran espada forjada para causar daño devastador. Aumenta el daño del ataque básico físico, ocupando ambas manos."
       }
     ]
   }
