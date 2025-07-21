@@ -1,4 +1,7 @@
 const chalk = require('chalk');
+const generarEnemigoPorNivel = require('./generadorEnemigos');
+const { iniciarCombate } = require('../services/combateService');
+
 
 async function narrarLento(texto, velocidad = 1000) {
   console.clear();
@@ -12,20 +15,24 @@ async function narrarLento(texto, velocidad = 1000) {
 async function iniciarAventura(personaje) {
   if (personaje.nivel === 1) {
     const narrativa = chalk.yellowBright(`
-${chalk.bold("🏰 La Torre de los Tres Caminos")} es una construcción ancestral, erigida en el corazón del Reino de ${chalk.italic("O’dromos")}.
+    ${chalk.bold("🏰 La Torre de los Tres Caminos")} es una construcción ancestral, erigida en el corazón del Reino de ${chalk.italic("O’dromos")}.
 
-Su creación fue ordenada por el monarca de estas tierras, con la ayuda de sus tres más fieles consejeros. La torre fue diseñada como un desafío letal, reservado únicamente para aquellos héroes dispuestos a convertirse en los verdaderos defensores del reino.
+    Su creación fue ordenada por el monarca de estas tierras, con la ayuda de sus tres más fieles consejeros. La torre fue diseñada como un desafío letal, reservado únicamente para aquellos héroes dispuestos a convertirse en los verdaderos defensores del reino.
 
-${chalk.cyan("⚠️ Sin embargo, no es un reto cualquiera...")} Entrar en la torre implica aceptar el riesgo de perderlo todo: tu vida, tu alma y tu legado.
+    ${chalk.cyan("⚠️ Sin embargo, no es un reto cualquiera...")} Entrar en la torre implica aceptar el riesgo de perderlo todo: tu vida, tu alma y tu legado.
 
-${chalk.bold("Solo los valientes")} de corazón puro y voluntad férrea se atreven a cruzar sus puertas.
+    ${chalk.bold("Solo los valientes")} de corazón puro y voluntad férrea se atreven a cruzar sus puertas.
 
-${chalk.gray("🌑 Asciende por sus niveles, enfréntate a criaturas olvidadas por el tiempo…")}  
-y demuestra que tu destino está escrito en las alturas.
+    ${chalk.gray("🌑 Asciende por sus niveles, enfréntate a criaturas olvidadas por el tiempo…")}  
+    y demuestra que tu destino está escrito en las alturas.
 
-${chalk.redBright("☠️ Si fallas, tu historia terminará allí. Y no habrá regreso.")}`);
-
+    ${chalk.redBright("☠️ Si fallas, tu historia terminará allí. Y no habrá regreso.")}`);
+    
     await narrarLento(narrativa, 1500);
+
+    const enemigo = generarEnemigoPorNivel(personaje.nivel);
+    await iniciarCombate(personaje, enemigo);
+
   } else if (personaje.nivel === 2) {
     const narrativa = chalk.magentaBright(`
 ${chalk.bold("⚔️ Has sobrevivido...")} al primer umbral de la Torre de los Tres Caminos.
@@ -45,6 +52,9 @@ Que tu voluntad sea firme, y tus decisiones letales.
 ${chalk.red("🩸 No hay marcha atrás.")}`);
 
     await narrarLento(narrativa, 1500);
+    const enemigo = generarEnemigoPorNivel(personaje.nivel);
+    await iniciarCombate(personaje, enemigo);
+
   } else if (personaje.nivel === 3) {
     const narrativa = chalk.redBright(`
 ${chalk.bold("🕯️ Tercer nivel alcanzado...")} El aire es más denso, y la oscuridad se vuelve tangible.
@@ -62,6 +72,9 @@ ${chalk.bold("🧠 La mente también es un campo de batalla.")}
 
 ${chalk.yellowBright("🕳️ Bienvenido al corazón del abismo.")}`);
     await narrarLento(narrativa, 1500);
+    const enemigo = generarEnemigoPorNivel(personaje.nivel);
+    await iniciarCombate(personaje, enemigo);
+
   } else if (personaje.nivel === 4) {
     const narrativa = chalk.blueBright(`
 ${chalk.bold("🌀 La energía de la torre cambia...")} te observa, te estudia.
@@ -79,6 +92,9 @@ Tu poder, tu compasión, tu ego… todo será puesto a prueba.
 
 ${chalk.red("Y no todos los héroes merecen el final que desean.")}`);
     await narrarLento(narrativa, 1500);
+    const enemigo = generarEnemigoPorNivel(personaje.nivel);
+    await iniciarCombate(personaje, enemigo);
+
   } else if (personaje.nivel === 5) {
     const narrativa = chalk.yellow.bold(`
 ${chalk.bold("👑 Has llegado a la cima...")}
@@ -100,6 +116,9 @@ ${chalk.greenBright("⚔️ Este es tu momento.")}
 
 ${chalk.redBright("No hay mañana. Solo victoria... o silencio eterno.")}`);
     await narrarLento(narrativa, 1500);
+    const enemigo = generarEnemigoPorNivel(personaje.nivel);
+    await iniciarCombate(personaje, enemigo);
+
   }
 
 
