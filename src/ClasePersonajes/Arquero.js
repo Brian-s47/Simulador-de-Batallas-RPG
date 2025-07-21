@@ -33,7 +33,7 @@ class Arquero extends Personaje {
       case 'Flecha arcana':
         return this.usarFlechaArcana();
       case 'Apuntar':
-        
+        return this.usarFlechaArcana();
       case 'Usar objeto':
         return 'Objeto usado';
       default:
@@ -66,7 +66,6 @@ class Arquero extends Personaje {
 
     return `${this.nombre} dispara una flecha perforante que causa ${danio} de daño ignorando la armadura fisica`;
   }
-
   // Metodo para habilidad especial 'Flecha arcana'
   usarFlechaArcana() {
     let danio = 4;// Daño basico de la habilidad

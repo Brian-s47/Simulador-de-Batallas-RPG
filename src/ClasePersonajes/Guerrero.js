@@ -35,51 +35,48 @@ class Guerrero extends Personaje {
         return 'Habilidad no reconocida'; // Opcion de descarte para fallas en el menu
     }
   }
+  // Metodo para habilidad especial 'Ataque básico'
+  usarAtaqueBasico() {
+      let danio = 3; // Daño basico de la habilidad
 
-    // Metodo para habilidad especial 'Ataque básico'
-    usarAtaqueBasico() {
-        let danio = 3; // Daño basico de la habilidad
+      // Validacion de modificadores
+      const modificadores = this.inventario.getModificadoresPara('Ataque básico', 'fisico'); // Validar si algun item de inventario modifica tipo de ataque o habilidad especifica
+      modificadores.forEach(modificador => { // Ciclo para aplicar modificadores segun corresponde
+          if (modificador.tipo === 'daño' && modificador.modo === 'aumentar') { // Validacion de condicion para activar efecto
+          danio += modificador.valor; // Aplicacion de bonificacion de efecto
+          }
+      });
 
-        // Validacion de modificadores
-        const modificadores = this.inventario.getModificadoresPara('Ataque básico', 'fisico'); // Validar si algun item de inventario modifica tipo de ataque o habilidad especifica
-        modificadores.forEach(modificador => { // Ciclo para aplicar modificadores segun corresponde
-            if (modificador.tipo === 'daño' && modificador.modo === 'aumentar') { // Validacion de condicion para activar efecto
-            danio += modificador.valor; // Aplicacion de bonificacion de efecto
-            }
-        });
+      // Validacion de modificadores de estados temporales
+      if (this.tieneEfecto('daño_doble')) { // Validacion de efecto 
+          const efecto = this.efectosTemporales.find(efecto => efecto.nombre === 'daño_doble'); // Validacion de nobre del efecto
+          const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5; // Aleatoriedad de doble daño
 
-        // Validacion de modificadores de estados temporales
-        if (this.tieneEfecto('daño_doble')) { // Validacion de efecto 
-            const efecto = this.efectosTemporales.find(efecto => efecto.nombre === 'daño_doble'); // Validacion de nobre del efecto
-            const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5; // Aleatoriedad de doble daño
+          if (debeActivarse) { // si se tiene efecto garantizado
+          danio *= 2;
+          }
 
-            if (debeActivarse) { // si se tiene efecto garantizado
-            danio *= 2;
-            }
+          this.consumirEfecto('daño_doble'); // Metodo para consumir el efecto que ya se uso 
+      }
 
-            this.consumirEfecto('daño_doble'); // Metodo para consumir el efecto que ya se uso 
-        }
+      return `${this.nombre} ataca con fuerza causando ${danio} de daño.`; // Mensaje de el daño efectuado con el ataque
+  }
+  // Metodo para habilidad especial 'Furia'
+  usarFuria() {
 
-        return `${this.nombre} ataca con fuerza causando ${danio} de daño.`; // Mensaje de el daño efectuado con el ataque
-    }
+      // Verificamos si tiene objeto que modifica la habilidad
+      const tieneObjeto = this.inventario.getModificadoresPara('Furia') 
+      .some(modificador => modificador.tipo === 'daño' && modificador.valor >= 1);
 
-    // Metodo para habilidad especial 'Furia'
-    usarFuria() {
-
-        // Verificamos si tiene objeto que modifica la habilidad
-        const tieneObjeto = this.inventario.getModificadoresPara('Furia') 
-        .some(modificador => modificador.tipo === 'daño' && modificador.valor >= 1);
-
-        // Validacion para mejorar efecto temporal
-        if (tieneObjeto) {
-            this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'garantizado'});
-            return `${this.nombre} toca el Cuerno de Guerra: ¡el próximo ataque hará daño doble garantizado!`;
-        } else {
-            this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'probable' });
-            return `${this.nombre} entra en furia: el próximo ataque podría hacer doble daño.`;
-        }
-    }
-
+      // Validacion para mejorar efecto temporal
+      if (tieneObjeto) {
+          this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'garantizado'});
+          return `${this.nombre} toca el Cuerno de Guerra: ¡el próximo ataque hará daño doble garantizado!`;
+      } else {
+          this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'probable' });
+          return `${this.nombre} entra en furia: el próximo ataque podría hacer doble daño.`;
+      }
+  }
   // Metodo para habilidad especial 'Grito defensivo'  
   usarGritoDefensivo() {
     let reduccion = 50; // reduccion base del efecto 

@@ -1,6 +1,7 @@
 [
   {
     "nombre": "Poción de curación",
+    "nivel": 1,
     "tipo": "pocion",
     "manos": 0,
     "tiposPermitidos": ["Todos"],
@@ -11,10 +12,12 @@
         "modo": "aumentar",
         "valor": 0.3
       }
-    ]
+    ],
+    "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
   },
   {
     "nombre": "espada de una mano",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 1,
     "tiposPermitidos": ["Guerrero"],
@@ -29,10 +32,12 @@
           "tipoDanio": "fisico"
         }
       }
-    ]
+    ],
+    "descripcion": "Una espada equilibrada y confiable usada por soldados del reino. Aumenta el daño físico del ataque básico del guerrero."
   },
   {
-    "nombre": "Escudo básico de una mano",
+    "nombre": "Escudo básico",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 1,
     "tiposPermitidos": ["Guerrero"],
@@ -46,10 +51,12 @@
           "tipoDanio": "fisico"
         }
       }
-    ]
+    ],
+    "descripcion": "Escudo de madera reforzada. Permite reducir el daño físico recibido mediante una defensa básica efectiva."
   },
   {
     "nombre": "Espada de dos manos",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 2,
     "tiposPermitidos": ["Guerrero"],
@@ -64,10 +71,12 @@
           "tipoDanio": "fisico"
         }
       }
-    ]
+    ],
+    "descripcion": "Gran espada forjada para causar daño devastador. Aumenta el daño del ataque básico físico, ocupando ambas manos."
   },
   {
-    "nombre": "Arco mágico de dos manos",
+    "nombre": "Arco Arcano",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 2,
     "tiposPermitidos": ["Arquero"],
@@ -82,10 +91,12 @@
           "tipoDanio": "magico"
         }
       }
-    ]
+    ],
+    "descripcion": "Arco imbuido con energía arcana que potencia la habilidad Flecha arcana, aumentando su daño mágico."
   },
   {
-    "nombre": "Arco físico de dos manos",
+    "nombre": "Arco largo",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 2,
     "tiposPermitidos": ["Arquero"],
@@ -100,10 +111,12 @@
           "tipoDanio": "fisico"
         }
       }
-    ]
+    ],
+    "descripcion": "Arco de gran alcance diseñado para atravesar armaduras. Mejora el daño físico de la habilidad Flecha perforante."
   },
   {
-    "nombre": "Báculo de fuego de dos manos",
+    "nombre": "Báculo de fuego",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 2,
     "tiposPermitidos": ["Mago"],
@@ -118,12 +131,14 @@
           "tipoDanio": "magico"
         }
       }
-    ]
+    ],
+    "descripcion": "Instrumento mágico canalizador de fuego arcano. Potencia la habilidad Bola de fuego aumentando su daño mágico."
   },
   {
     "nombre": "Tomo de hielo",
+    "nivel": 1,
     "tipo": "equipo",
-    "manos": 2,
+    "manos": 1,
     "tiposPermitidos": ["Mago"],
     "disponible": true,
     "modificadores": [
@@ -136,12 +151,14 @@
           "tipoDanio": "magico"
         }
       }
-    ]
+    ],
+    "descripcion": "Libro arcano que concentra la magia del hielo. Aumenta el daño mágico de la habilidad Bola de hielo."
   },
   {
     "nombre": "Espejo de reflejo",
+    "nivel": 1,
     "tipo": "equipo",
-    "manos": 2,
+    "manos": 1,
     "tiposPermitidos": ["Mago"],
     "disponible": true,
     "modificadores": [
@@ -153,10 +170,12 @@
           "habilidad": "Reflejo"
         }
       }
-    ]
+    ],
+    "descripcion": "Artefacto místico que permite crear reflejos protectores. Aumenta la cantidad de ataques que pueden ser absorbidos por la habilidad Reflejo."
   },
   {
     "nombre": "Cuerno de guerra",
+    "nivel": 1,
     "tipo": "equipo",
     "manos": 1,
     "tiposPermitidos": ["Guerrero"],
@@ -170,95 +189,91 @@
           "habilidad": "Furia"
         }
       }
-    ]
+    ],
+    "descripcion": "Cuerno ceremonial que despierta la furia interior del guerrero. Mejora la habilidad Furia otorgando mayor probabilidad de daño doble."
   },
   {
-    "nombre": "Poción de maná",
-    "tipo": "pocion",
-    "manos": 0,
-    "tiposPermitidos": ["Todos"],
-    "disponible": true,
-    "modificadores": [
-      {
-        "tipo": "mana",
-        "modo": "aumentar",
-        "valor": 0.25
-      }
-    ]
-  },
-  {
-    "nombre": "Daga venenosa",
+    "nombre": "Espada del coloso",
+    "nivel": 2,
     "tipo": "equipo",
-    "manos": 1,
-    "tiposPermitidos": ["Arquero"],
+    "manos": 2,
+    "tiposPermitidos": ["Guerrero"],
     "disponible": true,
     "modificadores": [
       {
         "tipo": "daño",
         "modo": "aumentar",
-        "valor": 1,
+        "valor": 5,
         "afecta": {
-          "habilidad": "Ataque sigiloso",
+          "habilidad": "Ataque básico",
           "tipoDanio": "fisico"
         }
-      },
-      {
-        "tipo": "estado",
-        "modo": "aplicar",
-        "valor": "veneno",
-        "afecta": {
-          "habilidad": "Ataque sigiloso"
-        }
       }
-    ]
+    ],
+    "descripcion": "Espada pesada que requiere gran fuerza para blandirla. Incrementa fuertemente el daño físico del ataque básico."
   },
   {
-    "nombre": "Escudo mágico de una mano",
-    "tipo": "equipo",
-    "manos": 1,
-    "tiposPermitidos": ["Mago"],
-    "disponible": true,
-    "modificadores": [
-      {
-        "tipo": "defensa",
-        "modo": "aumentar",
-        "valor": 15,
-        "afecta": {
-          "tipoDanio": "magico"
-        }
-      }
-    ]
-  },
-  {
-    "nombre": "Guanteletes reforzados",
+    "nombre": "Escudo de hierro templado",
+    "nivel": 2,
     "tipo": "equipo",
     "manos": 1,
     "tiposPermitidos": ["Guerrero"],
     "disponible": true,
     "modificadores": [
       {
-        "tipo": "fuerza",
+        "tipo": "defensa",
         "modo": "aumentar",
-        "valor": 5
+        "valor": 35,
+        "afecta": {
+          "tipoDanio": "fisico"
+        }
       }
-    ]
+    ],
+    "descripcion": "Escudo resistente fabricado por herreros élite. Proporciona una mejora significativa a la defensa física."
   },
   {
-    "nombre": "Capa del sigilo",
+    "nombre": "Arco espectral",
+    "nivel": 2,
     "tipo": "equipo",
-    "manos": 0,
+    "manos": 2,
     "tiposPermitidos": ["Arquero"],
     "disponible": true,
     "modificadores": [
       {
-        "tipo": "evasión",
+        "tipo": "daño",
         "modo": "aumentar",
-        "valor": 10
+        "valor": 4,
+        "afecta": {
+          "habilidad": "Flecha arcana",
+          "tipoDanio": "magico"
+        }
       }
-    ]
+    ],
+    "descripcion": "Arco encantado con energía etérea. Mejora considerablemente el daño mágico de la Flecha arcana."
   },
   {
-    "nombre": "Orbe de relámpago",
+    "nombre": "Arco afilado de guerra",
+    "nivel": 2,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 4,
+        "afecta": {
+          "habilidad": "Flecha perforante",
+          "tipoDanio": "fisico"
+        }
+      }
+    ],
+    "descripcion": "Arco con punta reforzada para atravesar armaduras. Incrementa el daño físico de la Flecha perforante."
+  },
+  {
+    "nombre": "Báculo ígneo superior",
+    "nivel": 2,
     "tipo": "equipo",
     "manos": 2,
     "tiposPermitidos": ["Mago"],
@@ -267,47 +282,60 @@
       {
         "tipo": "daño",
         "modo": "aumentar",
-        "valor": 3,
+        "valor": 4,
         "afecta": {
-          "habilidad": "Descarga eléctrica",
+          "habilidad": "Bola de fuego",
           "tipoDanio": "magico"
         }
       }
-    ]
+    ],
+    "descripcion": "Báculo forjado en volcanes mágicos. Potencia en gran medida el daño mágico de la Bola de fuego."
   },
   {
-    "nombre": "Tomo de sabiduría arcana",
+    "nombre": "Tomo glacial",
+    "nivel": 2,
     "tipo": "equipo",
-    "manos": 2,
+    "manos": 1,
     "tiposPermitidos": ["Mago"],
     "disponible": true,
     "modificadores": [
       {
-        "tipo": "inteligencia",
+        "tipo": "daño",
         "modo": "aumentar",
-        "valor": 4
+        "valor": 4,
+        "afecta": {
+          "habilidad": "Bola de hielo",
+          "tipoDanio": "magico"
+        }
       }
-    ]
+    ],
+    "descripcion": "Texto ancestral con runas heladas. Amplifica el poder de la Bola de hielo causando mayor daño mágico."
   },
   {
-    "nombre": "Poción de velocidad",
-    "tipo": "pocion",
-    "manos": 0,
-    "tiposPermitidos": ["Todos"],
+    "nombre": "Espejo del doble reflejo",
+    "nivel": 2,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Mago"],
     "disponible": true,
     "modificadores": [
       {
-        "tipo": "velocidad",
+        "tipo": "absorcion",
         "modo": "aumentar",
-        "valor": 0.2
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Reflejo"
+        }
       }
-    ]
+    ],
+    "descripcion": "Artefacto encantado que duplica la defensa arcana. Otorga dos absorciones completas a la habilidad Reflejo."
   },
   {
-    "nombre": "Ballesta de mano",
+    "nombre": "Cuerno bélico rúnico",
+    "nivel": 2,
     "tipo": "equipo",
     "manos": 1,
-    "tiposPermitidos": ["Arquero"],
+    "tiposPermitidos": ["Guerrero"],
     "disponible": true,
     "modificadores": [
       {
@@ -315,27 +343,324 @@
         "modo": "aumentar",
         "valor": 2,
         "afecta": {
-          "habilidad": "Disparo rápido",
+          "habilidad": "Furia"
+        }
+      }
+    ],
+    "descripcion": "Cuerno grabado con runas de batalla. Mejora significativamente la efectividad de la habilidad Furia."
+  },
+  {
+    "nombre": "Mandoble ancestral",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 7,
+        "afecta": {
+          "habilidad": "Ataque básico",
           "tipoDanio": "fisico"
         }
       }
-    ]
+    ],
+    "descripcion": "Espada legendaria que perteneció a un héroe olvidado. Aumenta en gran medida el daño físico del ataque básico."
   },
   {
-    "nombre": "Cuerno de inspiración",
+    "nombre": "Escudo de acero negro",
+    "nivel": 3,
     "tipo": "equipo",
     "manos": 1,
     "tiposPermitidos": ["Guerrero"],
     "disponible": true,
     "modificadores": [
       {
-        "tipo": "buff",
+        "tipo": "defensa",
         "modo": "aumentar",
-        "valor": "ataque",
+        "valor": 50,
         "afecta": {
-          "habilidad": "Motivar aliados"
+          "tipoDanio": "fisico"
         }
       }
-    ]
+    ],
+    "descripcion": "Un escudo macizo forjado con acero encantado. Proporciona una defensa física formidable contra cualquier ataque."
+  },
+  {
+    "nombre": "Arco de energía pura",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 6,
+        "afecta": {
+          "habilidad": "Flecha arcana",
+          "tipoDanio": "magico"
+        }
+      }
+    ],
+    "descripcion": "Arco forjado con cristales mágicos. Aumenta drásticamente el daño mágico de la Flecha arcana."
+  },
+  {
+    "nombre": "Arco de colmillo de bestia",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 6,
+        "afecta": {
+          "habilidad": "Flecha perforante",
+          "tipoDanio": "fisico"
+        }
+      }
+    ],
+    "descripcion": "Arco de hueso tallado que canaliza fuerza salvaje. Mejora notablemente el daño físico de la Flecha perforante."
+  },
+  {
+    "nombre": "Báculo volcánico",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 6,
+        "afecta": {
+          "habilidad": "Bola de fuego",
+          "tipoDanio": "magico"
+        }
+      }
+    ],
+    "descripcion": "Báculo extraído del corazón de un volcán. Potencia intensamente la Bola de fuego con un daño mágico superior."
+  },
+  {
+    "nombre": "Tomo glacial antiguo",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 6,
+        "afecta": {
+          "habilidad": "Bola de hielo",
+          "tipoDanio": "magico"
+        }
+      }
+    ],
+    "descripcion": "Un tomo milenario que guarda secretos de las tormentas del norte. Mejora el daño mágico de la Bola de hielo."
+  },
+  {
+    "nombre": "Espejo de espejo",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "absorcion",
+        "modo": "aumentar",
+        "valor": 3,
+        "afecta": {
+          "habilidad": "Reflejo"
+        }
+      }
+    ],
+    "descripcion": "Objeto místico que refleja los reflejos. Otorga tres cargas de absorción completa mediante la habilidad Reflejo."
+  },
+  {
+    "nombre": "Cuerno del coloso caído",
+    "nivel": 3,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 3,
+        "afecta": {
+          "habilidad": "Furia"
+        }
+      }
+    ],
+    "descripcion": "Cuerno tomado de un antiguo titán derrotado. Mejora la Furia garantizando ataques de doble daño con mayor consistencia."
+  },
+  {
+    "nombre": "Espada de obsidiana",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 10,
+        "afecta": {
+          "habilidad": "Ataque básico",
+          "tipoDanio": "fisico"
+        }
+      }
+    ],
+    "descripcion": "Forjada con piedra volcánica endurecida, esta espada inflige un daño brutal con cada golpe básico."
+  },
+  {
+    "nombre": "Escudo del titán",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "defensa",
+        "modo": "aumentar",
+        "valor": 70,
+        "afecta": {
+          "tipoDanio": "fisico"
+        }
+      }
+    ],
+    "descripcion": "Este escudo gigante perteneció a un titán de guerra. Absorbe la mayor parte del daño físico recibido."
+  },
+  {
+    "nombre": "Arco del vacío lunar",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 9,
+        "afecta": {
+          "habilidad": "Flecha arcana",
+          "tipoDanio": "magico"
+        }
+      }
+    ],
+    "descripcion": "Un arco creado con fragmentos de luna y oscuridad. Incrementa drásticamente el daño mágico de Flecha arcana."
+  },
+  {
+    "nombre": "Arco perforador celestial",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 9,
+        "afecta": {
+          "habilidad": "Flecha perforante",
+          "tipoDanio": "fisico"
+        }
+      }
+    ],
+    "descripcion": "Forjado con hueso de dragón y metal celestial. La Flecha perforante atraviesa incluso la armadura más resistente."
+  },
+  {
+    "nombre": "Báculo solar",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 9,
+        "afecta": {
+          "habilidad": "Bola de fuego",
+          "tipoDanio": "magico"
+        }
+      }
+    ],
+    "descripcion": "Contiene un fragmento de sol en su núcleo. Su poder intensifica la Bola de fuego más allá de toda expectativa."
+  },
+  {
+    "nombre": "Tomo de la tormenta eterna",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 9,
+        "afecta": {
+          "habilidad": "Bola de hielo",
+          "tipoDanio": "magico"
+        }
+      }
+    ],
+    "descripcion": "Un grimorio antiguo que canaliza el frío absoluto. Aumenta intensamente el daño de la Bola de hielo."
+  },
+  {
+    "nombre": "Espejo infinito",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "absorcion",
+        "modo": "aumentar",
+        "valor": 4,
+        "afecta": {
+          "habilidad": "Reflejo"
+        }
+      }
+    ],
+    "descripcion": "Espejo encantado que proyecta reflejos eternos. Otorga cuatro absorciones de daño con la habilidad Reflejo."
+  },
+  {
+    "nombre": "Cuerno ancestral de guerra",
+    "nivel": 4,
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 4,
+        "afecta": {
+          "habilidad": "Furia"
+        }
+      }
+    ],
+    "descripcion": "Cuerno sagrado utilizado por antiguos reyes. Mejora enormemente la Furia, garantizando daño doble casi seguro."
   }
 ]

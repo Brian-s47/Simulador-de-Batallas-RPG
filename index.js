@@ -212,14 +212,20 @@ _'._.)' .'.' )_.'
     personaje = new Mago(nombre);
   }
 
+  // 🎒 Filtrar objetos compatibles con el tipo de personaje
+  const opcionesIniciales = objetosDisponibles.filter(obj =>
+    obj.disponible &&
+    (obj.tiposPermitidos.includes(personaje.tipo) || obj.tiposPermitidos.includes('Todos'))
+  );
+
   // 🎒 Selección de objetos iniciales
   const { seleccionObjetos } = await inquirer.prompt([
     {
       type: 'checkbox',
       name: 'seleccionObjetos',
       message: 'Selecciona 2 objetos iniciales:',
-      choices: objetosDisponibles.map(obj => ({
-        name: obj.nombre,
+      choices: opcionesIniciales.map(obj => ({
+        name: `${obj.nombre} (${obj.tipo})`,
         value: obj.nombre
       })),
       validate: function (respuesta) {
@@ -231,6 +237,7 @@ _'._.)' .'.' )_.'
     }
   ]);
 
+  // 🎁 Construir objetos seleccionados
   const objetosSeleccionados = seleccionObjetos.map(nombre => {
     const datos = objetosDisponibles.find(obj => obj.nombre === nombre);
 
@@ -242,14 +249,14 @@ _'._.)' .'.' )_.'
     return new Objeto(datos);
   }).filter(obj => obj !== null);
 
-  // Agregar al inventario del personaje
-  objetosSeleccionados.forEach(obj => {
+  // ➕ Agregar objetos al inventario y equipar si aplica
+  for (const obj of objetosSeleccionados) {
     personaje.inventario.agregarObjeto(obj);
 
     if (obj.tipo === 'equipo') {
-      personaje.inventario.cambiarEquipo(obj.nombre);
+      await personaje.inventario.cambiarEquipo(obj.nombre); // respeta lógica de manos
     }
-  });
+  }
 
   // 💾 Guardar personaje
   await guardarPersonaje(personaje);
