@@ -58,9 +58,11 @@ function deserializarPersonaje(data) {
   personaje.defensaFisica = data.defensaFisica;
   personaje.defensaMagica = data.defensaMagica;
   personaje.efectosTemporales = data.efectosTemporales || [];
-
+  personaje.inventario = data.inventario || [];
   // Reconstruir inventario
-  personaje.inventario = Inventario.deserializar(data.inventario, objetosDisponibles);
+  const inventarioReconstruido = Inventario.deserializar(data.inventario, objetosDisponibles);
+  personaje.inventario = inventarioReconstruido?.items || [];
+
 
   return personaje;
 }

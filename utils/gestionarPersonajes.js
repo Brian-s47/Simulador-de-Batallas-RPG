@@ -104,15 +104,43 @@ async function gestionarPersonaje() {
       })
     );
   } else if (accion === '📖 Ver detalles') {
-    console.log(
-      boxen(chalk.blueBright.bold(`📋 Detalles de ${personaje.nombre}`), {
-        padding: 1,
-        margin: 1,
-        borderColor: 'blue',
-        borderStyle: 'round',
-      })
-    );
-    console.dir(personaje, { depth: null, colors: true });
+  const inventarioTexto = (personaje.inventario && personaje.inventario.length > 0)
+    ? personaje.inventario
+        .map(obj => {
+          const estado = obj.disponible ? chalk.green('🟢 Disponible') : chalk.red('🔴 No disponible');
+          return `  - ${chalk.bold(obj.nombre)} (${chalk.gray(obj.tipo)}, ${chalk.yellow(`manos: ${obj.manos}`)}) ${estado}`;
+        })
+        .join('\n')
+    : chalk.gray('  (vacío)');
+
+  const detalles = `
+${chalk.bold('📋 Detalles de')} ${chalk.yellowBright(personaje.nombre)}
+
+${chalk.cyan('🧝 Clase:')} ${chalk.white(personaje.tipo)}
+${chalk.cyan('⭐ Nivel:')} ${chalk.white(personaje.nivel)}
+${chalk.cyan('❤️ Salud:')} ${chalk.white(personaje.salud)}
+${chalk.cyan('💥 Ataque:')} ${chalk.white(personaje.ataque ?? 'N/A')}
+${chalk.cyan('🛡️ Defensa física:')} ${chalk.white(personaje.defensaFisica ?? 'N/A')}
+${chalk.cyan('🪄 Defensa mágica:')} ${chalk.white(personaje.defensaMagica ?? 'N/A')}
+`;
+
+  console.log(
+    boxen(detalles, {
+      padding: 1,
+      margin: 1,
+      borderColor: 'blue',
+      borderStyle: 'round',
+    })
+  );
+
+  await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'continuar',
+      message: chalk.gray('\nPresiona Enter para volver al menú...'),
+    },
+  ]);
+
   } else if (accion === '✏️ Cambiar nombre') {
     const { nuevoNombre } = await inquirer.prompt({
       type: 'input',
