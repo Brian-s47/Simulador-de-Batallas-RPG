@@ -40,7 +40,7 @@ function deserializarPersonaje(data) {
       personaje = new Guerrero(data.nombre);
       break;
     case 'Arquero':
-      personaje = new Arquero(data.nombre); // Ojo: si usás defensa personalizada, hay que guardar ese dato
+      personaje = new Arquero(data.nombre);
       break;
     case 'Mago':
       personaje = new Mago(data.nombre);
@@ -92,9 +92,20 @@ async function eliminarPersonaje(id) {
   console.log(`🗑️ Personaje eliminado correctamente.`);
 }
 
+// 📥 Cargar todos los personajes guardados
+async function cargarPersonajes() {
+  const dbPath = path.join(__dirname, '../data/personajes.json');
+  const adapter = new JSONFile(dbPath);
+  const db = new Low(adapter);
+  await db.read();
+  return db.data || [];
+}
+
+// 🧾 Exportar funciones
 module.exports = {
   serializarPersonaje,
   deserializarPersonaje,
   guardarPersonaje,
-  eliminarPersonaje
+  eliminarPersonaje,
+  cargarPersonajes // ✅ ¡Ahora sí está exportada!
 };

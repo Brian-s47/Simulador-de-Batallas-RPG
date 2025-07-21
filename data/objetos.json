@@ -171,5 +171,171 @@
         }
       }
     ]
+  },
+  {
+    "nombre": "Poción de maná",
+    "tipo": "pocion",
+    "manos": 0,
+    "tiposPermitidos": ["Todos"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "mana",
+        "modo": "aumentar",
+        "valor": 0.25
+      }
+    ]
+  },
+  {
+    "nombre": "Daga venenosa",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 1,
+        "afecta": {
+          "habilidad": "Ataque sigiloso",
+          "tipoDanio": "fisico"
+        }
+      },
+      {
+        "tipo": "estado",
+        "modo": "aplicar",
+        "valor": "veneno",
+        "afecta": {
+          "habilidad": "Ataque sigiloso"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Escudo mágico de una mano",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "defensa",
+        "modo": "aumentar",
+        "valor": 15,
+        "afecta": {
+          "tipoDanio": "magico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Guanteletes reforzados",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "fuerza",
+        "modo": "aumentar",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "nombre": "Capa del sigilo",
+    "tipo": "equipo",
+    "manos": 0,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "evasión",
+        "modo": "aumentar",
+        "valor": 10
+      }
+    ]
+  },
+  {
+    "nombre": "Orbe de relámpago",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 3,
+        "afecta": {
+          "habilidad": "Descarga eléctrica",
+          "tipoDanio": "magico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Tomo de sabiduría arcana",
+    "tipo": "equipo",
+    "manos": 2,
+    "tiposPermitidos": ["Mago"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "inteligencia",
+        "modo": "aumentar",
+        "valor": 4
+      }
+    ]
+  },
+  {
+    "nombre": "Poción de velocidad",
+    "tipo": "pocion",
+    "manos": 0,
+    "tiposPermitidos": ["Todos"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "velocidad",
+        "modo": "aumentar",
+        "valor": 0.2
+      }
+    ]
+  },
+  {
+    "nombre": "Ballesta de mano",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Arquero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "daño",
+        "modo": "aumentar",
+        "valor": 2,
+        "afecta": {
+          "habilidad": "Disparo rápido",
+          "tipoDanio": "fisico"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "Cuerno de inspiración",
+    "tipo": "equipo",
+    "manos": 1,
+    "tiposPermitidos": ["Guerrero"],
+    "disponible": true,
+    "modificadores": [
+      {
+        "tipo": "buff",
+        "modo": "aumentar",
+        "valor": "ataque",
+        "afecta": {
+          "habilidad": "Motivar aliados"
+        }
+      }
+    ]
   }
 ]
