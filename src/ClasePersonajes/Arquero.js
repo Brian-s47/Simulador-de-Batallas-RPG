@@ -1,110 +1,102 @@
-// Zona de importaciones ********************************************************************************************************************************
-const Personaje = require('./Personaje');// Clase "Personaje" padre para extender por herencia
+const Personaje = require('./Personaje');
 
-// Creacion de clase Arquero, subclase de Personaje que extiende sus atributos del padre "Personaje"
 class Arquero extends Personaje {
-  // Constructor y datos que se reciben
-  constructor(nombre, defensaExtra) { // recibimos el nombre del personaje indicado por el jugador y el efecto elegido en el menu especial para esta subclase
-    super(nombre, 'Arquero');  // Llamamos a la super clase y le passamos el nombre y al tipo de personaje
-    
-    // Asignacion de atribibutos especiales de la subclase
+  constructor(nombre, defensaExtra) {
+    super(nombre, 'Arquero');
     this.salud += 5;
-    if (defensaExtra === 'fisica') { // condicion para aplicar segun lo elegido por el jugador
+
+    if (defensaExtra === 'fisica') {
       this.defensaFisica += 2;
     } else {
       this.defensaMagica += 2;
     }
 
-    // Asignacion de habilidades especiales de la subclase para mostrar en menus y conectar segun corresponda
     this.habilidades = [
       'Flecha perforante',
       'Flecha arcana',
       'Apuntar',
-      'Usar objeto'// Esta habilidad se conecta con la superclase Personaje ya que es una habilidad que todos los tipos de personaje tienen
+      'Usar objeto'
     ];
   }
-  // Metodos *****************************************************************************************************************************
 
-  // Metodo para usar habilidad el cual descenraliza la responzabilidad de ejecutar los ataques y los ejecuta de manera correcta
-  usarHabilidad(nombre) {
+  usarHabilidad(nombre, objetivo) {
     switch (nombre) {
       case 'Flecha perforante':
-        return this.usarFlechaPerforante();
+        return this.usarFlechaPerforante(objetivo);
       case 'Flecha arcana':
-        return this.usarFlechaArcana();
+        return this.usarFlechaArcana(objetivo);
       case 'Apuntar':
-        
+        return this.usarApuntar();
       case 'Usar objeto':
-        return 'Objeto usado';
+        this.usarObjeto('pocion');
+        return `${this.nombre} usa un objeto del inventario.`;
       default:
-        return 'Habilidad no reconocida'; // Opcion de descarte para fallas en el menu
+        return 'Habilidad no reconocida';
     }
   }
-  // Metodo para habilidad especial 'Flecha perforante'
-  usarFlechaPerforante() {
-    let danio = 4;// Daño basico de la habilidad
 
-    // Validacion de modificadores
-    const modificadores = this.inventario.getModificadoresPara('Flecha perforante', 'fisico'); // Validar si algun item de inventario modifica tipo de ataque o habilidad especifica
-    modificadores.forEach(modificador => { // Ciclo para aplicar modificadores segun corresponde
-        if (modificador.tipo === 'daño' && modificador.modo === 'aumentar') { // Validacion de condicion para activar efecto
-        danio += modificador.valor; // Aplicacion de bonificacion de efecto
-        }
+  getHabilidades() {
+    return this.habilidades.map(nombre => ({
+      nombre,
+      accion: (objetivo) => this.usarHabilidad(nombre, objetivo)
+    }));
+  }
+
+  usarFlechaPerforante(objetivo) {
+    let danio = 4;
+    const modificadores = this.inventario.getModificadoresPara('Flecha perforante', 'fisico');
+
+    modificadores.forEach(mod => {
+      if (mod.tipo === 'daño' && mod.modo === 'aumentar') {
+        danio += mod.valor;
+      }
     });
 
-    // Validacion de modificadores de estados temporales
-    if (this.tieneEfecto('daño_doble')) { // Validacion de efecto 
-        const efecto = this.efectosTemporales.find(efecto => efecto.nombre === 'daño_doble'); // Validacion de nombre del efecto
-        const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5; // Aleatoriedad de doble daño
-
-        if (debeActivarse) { // si se tiene efecto garantizado
-        danio *= 2;
-        }
-
-        this.consumirEfecto('daño_doble'); // Metodo para consumir el efecto que ya se uso 
+    if (this.tieneEfecto('daño_doble')) {
+      const efecto = this.efectosTemporales.find(e => e.nombre === 'daño_doble');
+      const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5;
+      if (debeActivarse) danio *= 2;
+      this.consumirEfecto('daño_doble');
     }
 
-    return `${this.nombre} dispara una flecha perforante que causa ${danio} de daño ignorando la armadura fisica`;
+    // Ignora defensa física: aplicar sin reducción
+    objetivo.salud -= danio;
+    if (objetivo.salud < 0) objetivo.salud = 0;
+
+    return `${this.nombre} dispara una flecha perforante ignorando la armadura y causando ${danio} de daño directo a ${objetivo.nombre}`;
   }
 
-  // Metodo para habilidad especial 'Flecha arcana'
-  usarFlechaArcana() {
-    let danio = 4;// Daño basico de la habilidad
+  usarFlechaArcana(objetivo) {
+    let danio = 4;
+    const modificadores = this.inventario.getModificadoresPara('Flecha arcana', 'magico');
 
-    // Validacion de modificadores
-    const modificadores = this.inventario.getModificadoresPara('Flecha arcana', 'magico'); // Validar si algun item de inventario modifica tipo de ataque o habilidad especifica
-    modificadores.forEach(modificador => { // Ciclo para aplicar modificadores segun corresponde
-        if (modificador.tipo === 'daño' && modificador.modo === 'aumentar') { // Validacion de condicion para activar efecto
-        danio += modificador.valor; // Aplicacion de bonificacion de efecto
-        }
+    modificadores.forEach(mod => {
+      if (mod.tipo === 'daño' && mod.modo === 'aumentar') {
+        danio += mod.valor;
+      }
     });
 
-    // Validacion de modificadores de estados temporales
-    if (this.tieneEfecto('daño_doble')) { // Validacion de efecto 
-        const efecto = this.efectosTemporales.find(efecto => efecto.nombre === 'daño_doble'); // Validacion de nombre del efecto
-        const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5; // Aleatoriedad de doble daño
-
-        if (debeActivarse) { // si se tiene efecto garantizado
-        danio *= 2;
-        }
-
-        this.consumirEfecto('daño_doble'); // Metodo para consumir el efecto que ya se uso 
+    if (this.tieneEfecto('daño_doble')) {
+      const efecto = this.efectosTemporales.find(e => e.nombre === 'daño_doble');
+      const debeActivarse = efecto.modo === 'garantizado' || Math.random() < 0.5;
+      if (debeActivarse) danio *= 2;
+      this.consumirEfecto('daño_doble');
     }
+
+    objetivo.recibirDanio(danio, 'magico');
+    return `${this.nombre} lanza una flecha arcana que inflige ${danio} de daño mágico a ${objetivo.nombre}`;
   }
-  // Metodo para habilidad especial 'Apuntar'
-  usarApuntar(){
 
-    // Verificamos si tiene objeto que modifica la habilidad
-    const tieneObjeto = this.inventario.getModificadoresPara('Apuntar') 
-    .some(modificador => modificador.tipo === 'daño' && modificador.valor >= 1);
+  usarApuntar() {
+    const tieneObjeto = this.inventario.getModificadoresPara('Apuntar')
+      .some(mod => mod.tipo === 'daño' && mod.valor >= 1);
 
-    // Validacion para mejorar efecto temporal
     if (tieneObjeto) {
-        this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'garantizado'});
-        return `${this.nombre} Usa mira preciza: ¡el próximo ataque hará daño doble garantizado!`;
+      this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'garantizado' });
+      return `${this.nombre} usa mira precisa: ¡el próximo ataque hará daño doble garantizado!`;
     } else {
-        this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'probable' });
-        return `${this.nombre} apunta con calma: el próximo ataque puede hacer el doble de daño`;
+      this.aplicarEfectoTemporal({ nombre: 'daño_doble', duracion: 1, modo: 'probable' });
+      return `${this.nombre} apunta con calma: el próximo ataque podría hacer el doble de daño.`;
     }
   }
 }

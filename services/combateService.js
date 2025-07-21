@@ -18,14 +18,17 @@ async function iniciarCombate(personaje, enemigo) {
       turnoDelEnemigo(personaje, enemigo);
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Pausa de 1 segundo entre turnos
-    turnoJugador = !turnoJugador; // Alternar turnos
+    // Reducir duración de efectos temporales
+    if (typeof personaje.actualizarEfectosTemporales === 'function') personaje.actualizarEfectosTemporales();
+    if (typeof enemigo.actualizarEfectosTemporales === 'function') enemigo.actualizarEfectosTemporales();
+
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Pausa de 1 segundo
+    turnoJugador = !turnoJugador;
   }
 
-  // Resultado final
   if (personaje.estaVivo()) {
     console.log(chalk.greenBright(`\n🏆 ¡${personaje.nombre} ha derrotado a ${enemigo.nombre}!\n`));
-    personaje.subirNivel(); // Sube de nivel al ganar
+    personaje.subirNivel();
   } else {
     console.log(chalk.redBright(`\n💀 ${personaje.nombre} ha sido derrotado por ${enemigo.nombre}...\n`));
   }
@@ -45,14 +48,18 @@ async function turnoDelJugador(personaje, enemigo) {
   ]);
 
   const habilidadSeleccionada = habilidades.find(hab => hab.nombre === accion);
-  habilidadSeleccionada.accion(enemigo); // Ejecutar acción sobre el enemigo
+  const resultado = habilidadSeleccionada.accion(enemigo);
+
+  if (resultado) {
+    console.log(chalk.blueBright(`🧠 ${resultado}`));
+  }
 }
 
-// Turno de la "IA" enemiga (básico: ataque básico siempre)
+// Turno del enemigo (IA)
 function turnoDelEnemigo(personaje, enemigo) {
   if (enemigo.estaVivo()) {
     console.log(chalk.yellow(`\n🔥 ${enemigo.nombre} ataca a ${personaje.nombre}!\n`));
-    enemigo.atacar(personaje); // Usa el método atacar del enemigo
+    enemigo.atacar(personaje);
   }
 }
 

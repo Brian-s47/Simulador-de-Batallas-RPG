@@ -95,6 +95,32 @@ class Inventario {
 
     return new Inventario(objetosReconstruidos);
   }
+    // Devuelve modificadores activos aplicables a una habilidad o tipo de daño
+  getModificadoresPara(habilidad = null, tipoDanio = null) {
+    let modificadores = [];
+
+    this.objetosEquipados.forEach(obj => {
+      if (obj.modificadores && Array.isArray(obj.modificadores)) {
+        obj.modificadores.forEach(mod => {
+          const afecta = mod.afecta || {};
+          const coincideHabilidad = habilidad ? afecta.habilidad === habilidad : true;
+          const coincideTipo = tipoDanio ? afecta.tipoDanio === tipoDanio : true;
+
+          if (coincideHabilidad && coincideTipo) {
+            modificadores.push(mod);
+          }
+        });
+      }
+    });
+
+    return modificadores;
+  }
+
+  // Devuelve todos los objetos actualmente equipados (compatibilidad con Personaje)
+  getEquipados() {
+    return this.objetosEquipados;
+  }
+
 
 }
 
