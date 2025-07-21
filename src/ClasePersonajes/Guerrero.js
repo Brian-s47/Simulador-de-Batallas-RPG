@@ -12,7 +12,7 @@ class Guerrero extends Personaje {
       'Usar objeto'
     ];
   }
-
+  // Metodo para usar las habilidades
   usarHabilidad(nombre, objetivo) {
     switch (nombre) {
       case 'Ataque básico':
@@ -28,74 +28,97 @@ class Guerrero extends Personaje {
         return 'Habilidad no reconocida';
     }
   }
-
+  // Metodo para obtenr habilidades
   getHabilidades() {
     return this.habilidades.map(nombre => ({
       nombre,
       accion: (objetivo) => this.usarHabilidad(nombre, objetivo)
     }));
   }
-
+  // Metodo de habilidad "Ataque básico"
   usarAtaqueBasico(objetivo) {
-    let danio = 3;
+    let danioBase = 3;
+    let danio = danioBase;
     const modificadores = this.inventario.getModificadoresPara('Ataque básico', 'fisico');
+
+    let detalles = [`🗡️ Daño base: ${danioBase}`];
 
     modificadores.forEach(mod => {
       if (mod.tipo === 'daño' && mod.modo === 'aumentar') {
         danio += mod.valor;
+        detalles.push(`🔧 Modificador de objeto: +${mod.valor} daño físico`);
       }
     });
 
     if (this.tieneEfecto('daño_doble')) {
-      const efecto = this.efectosTemporales.find(e => e.nombre === 'daño_doble');
-      const probabilidad = efecto.probabilidad || 0.5;
-      const debeActivarse = Math.random() < probabilidad;
+      const efectoDoble = this.efectosTemporales.find(e => e.nombre === 'daño_doble');
+      if (efectoDoble) {
+        const probabilidad = efectoDoble.probabilidad || 0.5;
+        const activado = Math.random() < probabilidad;
+        this.consumirEfecto('daño_doble');
 
-      if (debeActivarse) danio *= 2;
-      this.consumirEfecto('daño_doble');
-    }
+        if (activado) {
+          detalles.push(`🔥 Daño doble activado por efecto (${(probabilidad * 100).toFixed(0)}%)`);
+          danio *= 2;
+        } else {
+          detalles.push(`❌ Efecto de daño doble falló (${(probabilidad * 100).toFixed(0)}%)`);
+        }
+      }
+    }  
 
     objetivo.recibirDanio(danio, 'fisico');
-    return `${this.nombre} ataca con fuerza causando ${danio} de daño físico a ${objetivo.nombre}.`;
+    detalles.push(`🎯 Daño final infligido a ${objetivo.nombre}: ${danio}`);
+
+    return `${this.nombre} ejecuta un Ataque Básico.\n` + detalles.join('\n');
   }
   // Metodo de habilidad "Furia"
   usarFuria() {
+    let probabilidadBase = 0.5;
     let probabilidadExtra = 0;
-  
-    // Sumamos el % extra por modificadores de objetos
+
     const modificadores = this.inventario.getModificadoresPara('Furia');
+    const detalles = [];
+
     modificadores.forEach(mod => {
       if (mod.tipo === 'daño' && mod.modo === 'aumentar') {
-        probabilidadExtra += mod.valor; // cada punto = 1%
+        probabilidadExtra += mod.valor;
+        detalles.push(`🔧 Modificador de objeto: +${mod.valor}% a probabilidad de daño doble`);
       }
     });
-  
-    // Aplicamos efecto con probabilidad base + extra
+
+    const probabilidadFinal = probabilidadBase + (probabilidadExtra / 100);
+
     this.aplicarEfectoTemporal({
       nombre: 'daño_doble',
       duracion: 1,
       modo: 'probable',
-      probabilidad: 0.5 + (probabilidadExtra / 100) // base 50% + bonus
+      probabilidad: probabilidadFinal
     });
-  
-    return `${this.nombre} entra en furia: el próximo ataque tiene ${(50 + probabilidadExtra)}% de probabilidad de hacer daño doble.`;
+
+    detalles.push(`🎯 Probabilidad total de daño doble: ${(probabilidadFinal * 100).toFixed(0)}%`);
+
+    return `${this.nombre} entra en estado de furia.\n` + detalles.join('\n');
   }
-  
-
+  // Metodo de habilidad "Grito defensivo"
   usarGritoDefensivo() {
-    const modificadores = this.inventario.getModificadoresPara('defensa', 'aumentar');
-    let reduccion = 50;
+    let reduccionBase = 50;
+    let reduccionTotal = reduccionBase;
+    const detalles = [`🛡️ Reducción base de daño físico: ${reduccionBase}%`];
 
+    const modificadores = this.inventario.getModificadoresPara('defensa', 'aumentar');
     modificadores.forEach(mod => {
       if (mod.tipo === 'defensa' && mod.modo === 'aumentar') {
-        reduccion += mod.valor;
+        reduccionTotal += mod.valor;
+        detalles.push(`🔧 Modificador de objeto: +${mod.valor}%`);
       }
     });
 
-    // Aplica efecto temporal de reducción de daño físico recibido
-    this.aplicarEfectoTemporal({ nombre: 'reduccion_fisica', duracion: 1, valor: reduccion });
+    // Aplica el efecto
+    this.aplicarEfectoTemporal({ nombre: 'reduccion_fisica', duracion: 1, valor: reduccionTotal });
 
-    return `${this.nombre} lanza un grito defensivo. El siguiente ataque físico se reducirá un ${reduccion}%.`;
+    detalles.push(`🧱 Reducción total aplicada: ${reduccionTotal}%`);
+
+    return `${this.nombre} lanza un grito defensivo.\n` + detalles.join('\n');
   }
 }
 

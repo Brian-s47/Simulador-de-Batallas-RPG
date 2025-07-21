@@ -9,17 +9,14 @@ class Inventario {
     // Al iniciar, separamos los objetos que están equipados
     this.objetosEquipados = this.objetos.filter(obj => !obj.disponible);
   }
-
   // Devuelve una lista de todos los objetos
   listarObjetos() {
     return this.objetos;
   }
-
   // Devuelve los objetos actualmente equipados
   listarEquipados() {
     return this.objetosEquipados;
   }
-
   // Equipar un objeto si está disponible
   equiparObjeto(nombreObjeto) {
     const objeto = this.objetos.find(obj => obj.nombre === nombreObjeto);
@@ -35,7 +32,6 @@ class Inventario {
     objeto.disponible = false;
     this.objetosEquipados.push(objeto);
   }
-
   // Desequipar un objeto
   desequiparObjeto(nombreObjeto) {
     const objeto = this.objetosEquipados.find(obj => obj.nombre === nombreObjeto);
@@ -47,7 +43,6 @@ class Inventario {
     objeto.disponible = true;
     this.objetosEquipados = this.objetosEquipados.filter(obj => obj.nombre !== nombreObjeto);
   }
-
   // Cambiar de equipo: desequipa el actual del mismo tipo/manos y equipa el nuevo
   cambiarEquipo(nombreObjeto) {
     const objetoNuevo = this.objetos.find(obj => obj.nombre === nombreObjeto);
@@ -64,7 +59,33 @@ class Inventario {
 
     this.equiparObjeto(nombreObjeto);
   }
+  // Usa una poción del inventario sobre el personaje
+  usarPocion(nombreObjeto, personaje) {
+    const pocion = this.objetos.find(obj => obj.nombre.toLowerCase() === nombreObjeto.toLowerCase() && obj.tipo === 'pocion' && obj.disponible);
 
+    if (!pocion) {
+      console.log(`❌ No se encontró una poción disponible con el nombre "${nombreObjeto}".`);
+      return;
+    }
+
+    const modificador = pocion.modificadores.find(mod => mod.tipo === 'curacion' && mod.modo === 'aumentar');
+
+    if (!modificador) {
+      console.log(`⚠️ La poción "${pocion.nombre}" no tiene un efecto de curación válido.`);
+      return;
+    }
+
+    const porcentajeCuracion = modificador.valor;
+    const cantidadCurada = Math.floor(personaje.saludMaxima * porcentajeCuracion);
+
+    personaje.salud += cantidadCurada;
+    if (personaje.salud > personaje.saludMaxima) personaje.salud = personaje.saludMaxima;
+
+    console.log(`🧪 ${personaje.nombre} consumió "${pocion.nombre}" y recuperó ${cantidadCurada} puntos de salud.`);
+
+    // Eliminar la poción del inventario (simulando consumo)
+    this.objetos = this.objetos.filter(obj => obj !== pocion);
+  }
   // Serializar inventario para guardarlo en JSON
   serializar() {
     return this.objetos.map(obj => obj.serializar());
@@ -115,14 +136,10 @@ class Inventario {
 
     return modificadores;
   }
-
   // Devuelve todos los objetos actualmente equipados (compatibilidad con Personaje)
   getEquipados() {
     return this.objetosEquipados;
   }
-
-
 }
-
 // Exportamos la clase Inventario para ser usada por los personajes
 module.exports = Inventario;

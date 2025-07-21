@@ -4,7 +4,7 @@
     "tipo": "Enemigo",
     "nivel": 1,
     "salud": 100,
-    "ataque": 5,
+    "ataque": 7,
     "defensaFisica": 2,
     "defensaMagica": 5
   },
@@ -13,7 +13,7 @@
     "tipo": "Enemigo",
     "nivel": 1,
     "salud": 120,
-    "ataque": 6,
+    "ataque": 8,
     "defensaFisica": 5,
     "defensaMagica": 1
   },
@@ -22,16 +22,16 @@
     "tipo": "Enemigo",
     "nivel": 1,
     "salud": 150,
-    "ataque": 3,
+    "ataque": 5,
     "defensaFisica": 6,
     "defensaMagica": 2
   },
-      {
+  {
     "nombre": "Orco Asesino",
     "tipo": "Enemigo",
     "nivel": 1,
     "salud": 70,
-    "ataque": 7,
+    "ataque": 9,
     "defensaFisica": 1,
     "defensaMagica": 1
   },
@@ -40,7 +40,7 @@
     "tipo": "Enemigo",
     "nivel": 1,
     "salud": 100,
-    "ataque": 7,
+    "ataque": 9,
     "defensaFisica": 1,
     "defensaMagica": 9
   },
@@ -49,7 +49,7 @@
     "tipo": "Enemigo",
     "nivel": 2,
     "salud": 130,
-    "ataque": 8,
+    "ataque": 10,
     "defensaFisica": 3,
     "defensaMagica": 7
   },
@@ -58,7 +58,7 @@
     "tipo": "Enemigo",
     "nivel": 2,
     "salud": 140,
-    "ataque": 10,
+    "ataque": 12,
     "defensaFisica": 4,
     "defensaMagica": 2
   },
@@ -67,7 +67,7 @@
     "tipo": "Enemigo",
     "nivel": 2,
     "salud": 180,
-    "ataque": 5,
+    "ataque": 7,
     "defensaFisica": 8,
     "defensaMagica": 3
   },
@@ -76,7 +76,7 @@
     "tipo": "Enemigo",
     "nivel": 2,
     "salud": 90,
-    "ataque": 11,
+    "ataque": 13,
     "defensaFisica": 2,
     "defensaMagica": 2
   },
@@ -85,7 +85,7 @@
     "tipo": "Enemigo",
     "nivel": 2,
     "salud": 120,
-    "ataque": 10,
+    "ataque": 13,
     "defensaFisica": 2,
     "defensaMagica": 10
   },
@@ -94,7 +94,7 @@
     "tipo": "Enemigo",
     "nivel": 3,
     "salud": 160,
-    "ataque": 10,
+    "ataque": 13,
     "defensaFisica": 4,
     "defensaMagica": 9
   },
@@ -103,7 +103,7 @@
     "tipo": "Enemigo",
     "nivel": 3,
     "salud": 170,
-    "ataque": 12,
+    "ataque": 15,
     "defensaFisica": 5,
     "defensaMagica": 3
   },
@@ -112,7 +112,7 @@
     "tipo": "Enemigo",
     "nivel": 3,
     "salud": 200,
-    "ataque": 7,
+    "ataque": 10,
     "defensaFisica": 10,
     "defensaMagica": 4
   },
@@ -121,7 +121,7 @@
     "tipo": "Enemigo",
     "nivel": 3,
     "salud": 110,
-    "ataque": 14,
+    "ataque": 16,
     "defensaFisica": 3,
     "defensaMagica": 3
   },
@@ -130,16 +130,16 @@
     "tipo": "Enemigo",
     "nivel": 3,
     "salud": 140,
-    "ataque": 12,
+    "ataque": 15,
     "defensaFisica": 3,
     "defensaMagica": 12
   },
-      {
+  {
     "nombre": "Oráculo del Vacío",
     "tipo": "Enemigo",
     "nivel": 4,
     "salud": 190,
-    "ataque": 12,
+    "ataque": 15,
     "defensaFisica": 5,
     "defensaMagica": 13
   },
@@ -148,7 +148,7 @@
     "tipo": "Enemigo",
     "nivel": 4,
     "salud": 200,
-    "ataque": 14,
+    "ataque": 17,
     "defensaFisica": 6,
     "defensaMagica": 4
   },
@@ -157,7 +157,7 @@
     "tipo": "Enemigo",
     "nivel": 4,
     "salud": 240,
-    "ataque": 8,
+    "ataque": 11,
     "defensaFisica": 12,
     "defensaMagica": 5
   },
@@ -166,7 +166,7 @@
     "tipo": "Enemigo",
     "nivel": 4,
     "salud": 130,
-    "ataque": 16,
+    "ataque": 18,
     "defensaFisica": 4,
     "defensaMagica": 4
   },
@@ -175,16 +175,16 @@
     "tipo": "Enemigo",
     "nivel": 4,
     "salud": 160,
-    "ataque": 14,
+    "ataque": 17,
     "defensaFisica": 4,
     "defensaMagica": 15
   },
-      {
+  {
     "nombre": "Profeta del Fin de los Tiempos",
     "tipo": "Enemigo",
     "nivel": 5,
     "salud": 300,
-    "ataque": 18,
+    "ataque": 21,
     "defensaFisica": 6,
     "defensaMagica": 20
   },
@@ -193,7 +193,7 @@
     "tipo": "Enemigo",
     "nivel": 5,
     "salud": 320,
-    "ataque": 20,
+    "ataque": 24,
     "defensaFisica": 8,
     "defensaMagica": 6
   },
@@ -202,7 +202,7 @@
     "tipo": "Enemigo",
     "nivel": 5,
     "salud": 400,
-    "ataque": 12,
+    "ataque": 16,
     "defensaFisica": 20,
     "defensaMagica": 10
   },
@@ -211,7 +211,7 @@
     "tipo": "Enemigo",
     "nivel": 5,
     "salud": 180,
-    "ataque": 24,
+    "ataque": 28,
     "defensaFisica": 5,
     "defensaMagica": 5
   },
@@ -220,7 +220,7 @@
     "tipo": "Enemigo",
     "nivel": 5,
     "salud": 280,
-    "ataque": 22,
+    "ataque": 26,
     "defensaFisica": 6,
     "defensaMagica": 22
   }
