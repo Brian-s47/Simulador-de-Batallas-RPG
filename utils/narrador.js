@@ -124,9 +124,38 @@ ${chalk.redBright("No hay mañana. Solo victoria... o silencio eterno.")}`);
 
 
 }
+async function mostrarFinalSecreto(personaje) {
+  const fragmentos = [
+    `🗡️ Has derrotado al Jefe de la Torre de los Tres Caminos.`,
+    `\nLa lucha fue brutal...\nEstuviste al borde del abismo en más de una ocasión.\nSolo tu valor, tu honor, y tu voluntad te mantuvieron en pie.`,
+    `\nFelicitaciones, ${personaje.nombre}.\nSeguramente ahora sueñas con ser el defensor eterno del Reino de O’dromos.`,
+    `\nPero...\nAlgo se siente mal.\nEl aire vibra con una energía oscura.\nEscuchas cientos de respiraciones contenidas en la sala...`,
+    `\nY luego, los susurros:\n\n🗨️ "Vénganos..."\n🗨️ "Todo fue una trampa..."\n🗨️ "Sálvanos..."`,
+    `\nEncuentras un pergamino sellado entre las ruinas.`,
+    `\nAl romper el sello, las palabras arcanas se revelan ante ti...\nEs una lista.\nUna lista con los nombres de todos los héroes que alguna vez intentaron superar esta torre...`,
+    `\nSus almas no se perdieron.\nFueron redirigidas.`,
+    `\n⚠️ Encadenadas mediante un hechizo...\n...llevadas directamente al Palacio Real.`,
+    `\n💀 Has descubierto la verdad:\nEl Gobernador de O’dromos, junto con sus tres consejeros, construyó la Torre no como prueba...\n...sino como prisión.`,
+    `\nUna fuente para absorber el alma de cada héroe caído y alimentar su imperio eterno.`,
+    `\n🔥 Tú no puedes permitirlo.`,
+    `\nEmpuñas tu arma una vez más.`,
+    `\nDecides confrontar al verdadero enemigo...`,
+    `\n🕯️ Esta historia continuará...`
+  ];
+
+  for (const linea of fragmentos) {
+    console.clear();
+    console.log(chalk.yellow(linea));
+    await new Promise(resolve => setTimeout(resolve, 2200));
+  }
+
+  await new Promise(resolve => setTimeout(resolve, 3000));
+}
+
 
 module.exports = {
-  iniciarAventura
+  iniciarAventura,
+  mostrarFinalSecreto,
 };
 
 

@@ -1,4 +1,5 @@
-const Personaje = require('./Personaje');
+const Personaje = require('./Personaje.js');
+console.log('DEBUG >> Personaje:', typeof Personaje);
 
 class Enemigo extends Personaje {
     constructor(data) {
@@ -29,7 +30,17 @@ class Enemigo extends Personaje {
     }
 
     // 4. Determinar golpe crítico (40% de probabilidad)
-    const probCritico = 0.4;
+    function obtenerProbabilidadCritico(nivel) {
+    switch (nivel) {
+        case 1: return 0.05;
+        case 2: return 0.10;
+        case 3: return 0.20;
+        case 4: return 0.25;
+        case 5: return 0.35;
+        default: return 0.10;
+    }
+    }
+    const probCritico = obtenerProbabilidadCritico(this.nivel);
     const esCritico = Math.random() < probCritico;
 
     if (esCritico) {
