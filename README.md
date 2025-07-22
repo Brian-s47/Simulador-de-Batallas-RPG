@@ -154,7 +154,7 @@ node index.js
 ## 📹 Video demostrativo
 
 Aquí puedes ver una demostración en video del funcionamiento del proyecto:
-🔗 [Ver video en YouTube](https://youtu.be/qQ-Unb2XakM)  
+🔗 [Ver video en YouTube](https://www.youtube.com/watch?v=gLsz0NRCwwM)  
 
 
 ## 🧑‍🤝‍🧑 Créditos

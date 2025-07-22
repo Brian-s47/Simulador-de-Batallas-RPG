@@ -439,5 +439,59 @@
         "descripcion": "Instrumento mágico canalizador de fuego arcano. Potencia la habilidad Bola de fuego aumentando su daño mágico."
       }
     ]
+  },
+  {
+    "id": "4a5c2918-6ce7-4905-9688-676805b31e8e",
+    "nombre": "Phiinx",
+    "tipo": "Guerrero",
+    "nivel": 1,
+    "salud": 110,
+    "saludMaxima": 100,
+    "ataque": 10,
+    "defensaFisica": 7,
+    "defensaMagica": 5,
+    "efectosTemporales": [],
+    "inventario": [
+      {
+        "nombre": "Poción de curación",
+        "nivel": 1,
+        "tipo": "pocion",
+        "manos": 0,
+        "tiposPermitidos": [
+          "Todos"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "curacion",
+            "modo": "aumentar",
+            "valor": 0.3
+          }
+        ],
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
+      },
+      {
+        "nombre": "espada de una mano",
+        "nivel": 1,
+        "tipo": "equipo",
+        "manos": 1,
+        "tiposPermitidos": [
+          "Guerrero"
+        ],
+        "disponible": false,
+        "modificadores": [
+          {
+            "tipo": "daño",
+            "modo": "aumentar",
+            "valor": 2,
+            "afecta": {
+              "habilidad": "Ataque básico",
+              "tipoDanio": "fisico"
+            }
+          }
+        ],
+        "descripcion": "Una espada equilibrada y confiable usada por soldados del reino. Aumenta el daño físico del ataque básico del guerrero."
+      }
+    ]
   }
 ]
