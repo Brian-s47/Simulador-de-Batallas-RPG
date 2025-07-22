@@ -79,9 +79,9 @@ class Mago extends Personaje {
         detalles.push(`❌ Daño doble no se activó`);
       }
     }
-
-    objetivo.recibirDanio(danio, 'magico');
     detalles.push(`🎯 Daño mágico infligido a ${objetivo.nombre}: ${danio}`);
+    objetivo.recibirDanio(danio, 'magico');
+    
 
     return `${this.nombre} lanza una Bola de Fuego.\n` + detalles.join('\n');
   }
@@ -111,9 +111,8 @@ class Mago extends Personaje {
         detalles.push(`❌ Daño doble no se activó`);
       }
     }
-
-    objetivo.recibirDanio(danio, 'magico');
     detalles.push(`🎯 Daño mágico infligido a ${objetivo.nombre}: ${danio}`);
+    objetivo.recibirDanio(danio, 'magico');
 
     // Aplica penalización al ataque del enemigo
     const reduccion = 2;

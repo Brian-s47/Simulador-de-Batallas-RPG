@@ -52,24 +52,38 @@ class Personaje {
   }
 
   recibirDanio(cantidad, tipo = 'fisico') {
-    if (this.absorcionesPendientes > 0) {
-      this.absorcionesPendientes--;
-      console.log(`🛡️ ${this.nombre} absorbió el daño con Reflejo.`);
-      return;
-    }
-
-    let defensaAplicada = tipo === 'fisico' ? this.defensaFisica : this.defensaMagica;
-    let danioReducido = Math.max(cantidad - defensaAplicada, 1);
-
-    if (this.tieneEfecto('reduccion_fisica') && tipo === 'fisico') {
-      const efecto = this.efectosTemporales.find(e => e.nombre === 'reduccion_fisica');
-      danioReducido = Math.max(Math.floor(danioReducido * (1 - efecto.valor / 100)), 1);
-    }
-
-    this.salud -= danioReducido;
-    if (this.salud < 0) this.salud = 0;
-    console.log(`💢 ${this.nombre} recibe ${danioReducido} de daño (${tipo}).`);
+  if (this.absorcionesPendientes > 0) {
+    this.absorcionesPendientes--;
+    console.log(`🛡️ ${this.nombre} absorbió el daño con Reflejo.`);
+    return 0;
   }
+  console.log(`🎯 ${this.nombre} recibe ${cantidad} de daño (${tipo}).`);
+
+  let defensaAplicada = tipo === 'fisico' ? this.defensaFisica : this.defensaMagica;
+  let danioReducido = Math.max(cantidad - defensaAplicada, 1);
+
+  if (this.tieneEfecto('reduccion_fisica') && tipo === 'fisico') {
+    const efecto = this.efectosTemporales.find(e => e.nombre === 'reduccion_fisica');
+    danioReducido = Math.max(Math.floor(danioReducido * (1 - efecto.valor / 100)), 1);
+  }
+
+  this.salud -= danioReducido;
+  if (this.salud < 0) this.salud = 0;
+  console.log(`🛡️ ${this.nombre} tiene ${defensaAplicada} de defensa (${tipo}).`);
+  console.log(`💢 ${this.nombre} recibe ${danioReducido} de daño (${tipo}).`);
+  return danioReducido; // <<=== esto es nuevo
+}
+
+  usarObjeto(nombreObjeto) {
+    if (!this.inventario) return;
+    this.inventario.usarPocion(nombreObjeto, this);
+  }
+
+  cambiarEquipo(nombreObjeto) {
+    if (!this.inventario) return;
+    return this.inventario.cambiarEquipo(nombreObjeto);
+  }
+
 }
 
 module.exports = Personaje;

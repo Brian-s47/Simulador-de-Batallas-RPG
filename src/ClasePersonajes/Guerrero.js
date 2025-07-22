@@ -66,9 +66,9 @@ class Guerrero extends Personaje {
         }
       }
     }  
-
-    objetivo.recibirDanio(danio, 'fisico');
     detalles.push(`🎯 Daño final infligido a ${objetivo.nombre}: ${danio}`);
+    objetivo.recibirDanio(danio, 'fisico');
+    
 
     return `${this.nombre} ejecuta un Ataque Básico.\n` + detalles.join('\n');
   }

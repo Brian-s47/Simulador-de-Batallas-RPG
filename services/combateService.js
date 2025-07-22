@@ -22,10 +22,27 @@ function esperarTecla() {
     });
   });
 }
+function mostrarEstadisticas(personaje, enemigo) {
+  console.log(chalk.yellow.bold('\n📊 Estadísticas del combate:'));
+  console.log(chalk.cyanBright(`👤 ${personaje.nombre} (Nivel ${personaje.nivel})`));
+  console.log(`❤️ Salud: ${personaje.salud}/${personaje.saludMaxima}`);
+  console.log(`🗡️  Ataque base: ${personaje.ataque}`);
+  console.log(`🛡️  Defensa Física: ${personaje.defensaFisica}`);
+  console.log(`🔮 Defensa Mágica: ${personaje.defensaMagica}`);
+
+  console.log(chalk.redBright(`\n💀 ${enemigo.nombre} (Nivel ${enemigo.nivel})`));
+  console.log(`❤️ Salud: ${enemigo.salud}/${enemigo.saludMaxima}`);
+  console.log(`🗡️  Ataque base: ${enemigo.ataque}`);
+  console.log(`🛡️  Defensa Física: ${enemigo.defensaFisica}`);
+  console.log(`🔮 Defensa Mágica: ${enemigo.defensaMagica}`);
+  console.log(); // Espacio extra
+}
+
 
 // Función principal del sistema de combate
 async function iniciarCombate(personaje, enemigo) {
   console.log(chalk.cyanBright(`\n🔰 ¡Comienza el combate entre ${personaje.nombre} y ${enemigo.nombre}!\n`));
+  mostrarEstadisticas(personaje, enemigo);
 
   let turnoJugador = true;
 
