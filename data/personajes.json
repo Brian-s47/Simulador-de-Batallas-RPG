@@ -1,118 +1,191 @@
 [
   {
-    "id": "b6386ee6-764d-4dc2-9b57-1cd17dfa0868",
-    "nombre": "Danilo",
+    "id": "aa50c6fb-8be7-4bbd-8de1-18736efb8565",
+    "nombre": "Guerrero",
     "tipo": "Guerrero",
+    "nivel": 1,
+    "salud": 110,
+    "saludMaxima": 100,
+    "ataque": 10,
+    "defensaFisica": 7,
+    "defensaMagica": 5,
+    "efectosTemporales": [],
+    "inventario": [
+      {
+        "nombre": "Poción de curación",
+        "nivel": 1,
+        "tipo": "pocion",
+        "manos": 0,
+        "tiposPermitidos": [
+          "Todos"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "curacion",
+            "modo": "aumentar",
+            "valor": 0.3
+          }
+        ],
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
+      },
+      {
+        "nombre": "Espada de dos manos",
+        "nivel": 1,
+        "tipo": "equipo",
+        "manos": 2,
+        "tiposPermitidos": [
+          "Guerrero"
+        ],
+        "disponible": false,
+        "modificadores": [
+          {
+            "tipo": "daño",
+            "modo": "aumentar",
+            "valor": 3,
+            "afecta": {
+              "habilidad": "Ataque básico",
+              "tipoDanio": "fisico"
+            }
+          }
+        ],
+        "descripcion": "Gran espada forjada para causar daño devastador. Aumenta el daño del ataque básico físico, ocupando ambas manos."
+      }
+    ]
+  },
+  {
+    "id": "9dd33c06-9a92-464b-8482-25b6fbac406f",
+    "nombre": "Arquero",
+    "tipo": "Arquero",
+    "nivel": 1,
+    "salud": 105,
+    "saludMaxima": 100,
+    "ataque": 10,
+    "defensaFisica": 7,
+    "defensaMagica": 5,
+    "efectosTemporales": [],
+    "inventario": [
+      {
+        "nombre": "Poción de curación",
+        "nivel": 1,
+        "tipo": "pocion",
+        "manos": 0,
+        "tiposPermitidos": [
+          "Todos"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "curacion",
+            "modo": "aumentar",
+            "valor": 0.3
+          }
+        ],
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
+      },
+      {
+        "nombre": "Arco Arcano",
+        "nivel": 1,
+        "tipo": "equipo",
+        "manos": 2,
+        "tiposPermitidos": [
+          "Arquero"
+        ],
+        "disponible": false,
+        "modificadores": [
+          {
+            "tipo": "daño",
+            "modo": "aumentar",
+            "valor": 2,
+            "afecta": {
+              "habilidad": "Flecha arcana",
+              "tipoDanio": "magico"
+            }
+          }
+        ],
+        "descripcion": "Arco imbuido con energía arcana que potencia la habilidad Flecha arcana, aumentando su daño mágico."
+      }
+    ]
+  },
+  {
+    "id": "e771d293-6257-46c1-a149-12e303dfab3f",
+    "nombre": "Mago",
+    "tipo": "Mago",
     "nivel": 2,
     "salud": 110,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 7,
-    "defensaMagica": 5,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 3,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "76dfd085-4642-45bf-b47e-9cafff3a5195",
-    "nombre": "Isaac",
-    "tipo": "Guerrero",
-    "nivel": 4,
-    "salud": 110,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 7,
-    "defensaMagica": 5,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "6469f353-b60b-429f-b6a7-ca80dbeb6ffb",
-    "nombre": "holiwis",
-    "tipo": "Mago",
-    "nivel": 5,
-    "salud": 100,
-    "saludMaxima": 100,
-    "ataque": 10,
+    "saludMaxima": 110,
+    "ataque": 12,
     "defensaFisica": 5,
     "defensaMagica": 7,
     "efectosTemporales": [],
     "inventario": [
       {
+        "nombre": "Tomo de hielo",
+        "nivel": 1,
+        "tipo": "equipo",
+        "manos": 1,
+        "tiposPermitidos": [
+          "Mago"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "daño",
+            "modo": "aumentar",
+            "valor": 2,
+            "afecta": {
+              "habilidad": "Bola de hielo",
+              "tipoDanio": "magico"
+            }
+          }
+        ],
+        "descripcion": "Libro arcano que concentra la magia del hielo. Aumenta el daño mágico de la habilidad Bola de hielo."
+      },
+      {
+        "nombre": "Espejo de reflejo",
+        "nivel": 1,
+        "tipo": "equipo",
+        "manos": 1,
+        "tiposPermitidos": [
+          "Mago"
+        ],
+        "disponible": false,
+        "modificadores": [
+          {
+            "tipo": "absorcion",
+            "modo": "aumentar",
+            "valor": 1,
+            "afecta": {
+              "habilidad": "Reflejo"
+            }
+          }
+        ],
+        "descripcion": "Artefacto místico que permite crear reflejos protectores. Aumenta la cantidad de ataques que pueden ser absorbidos por la habilidad Reflejo."
+      },
+      {
+        "nombre": "Espejo del doble reflejo",
+        "nivel": 2,
+        "tipo": "equipo",
+        "manos": 1,
+        "tiposPermitidos": [
+          "Mago"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "absorcion",
+            "modo": "aumentar",
+            "valor": 2,
+            "afecta": {
+              "habilidad": "Reflejo"
+            }
+          }
+        ],
+        "descripcion": "Artefacto encantado que duplica la defensa arcana. Otorga dos absorciones completas a la habilidad Reflejo."
+      },
+      {
         "nombre": "Poción de curación",
+        "nivel": 1,
         "tipo": "pocion",
         "manos": 0,
         "tiposPermitidos": [
@@ -125,127 +198,8 @@
             "modo": "aumentar",
             "valor": 0.3
           }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
         ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "e6f71b69-0613-4c71-a936-8a2e4cf2c2ee",
-    "nombre": "Brian",
-    "tipo": "Guerrero",
-    "nivel": 1,
-    "salud": 110,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 7,
-    "defensaMagica": 5,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "00b39cb6-52d4-4fe8-a9f3-ccb45426e56d",
-    "nombre": "holaaaaaa",
-    "tipo": "Mago",
-    "nivel": 1,
-    "salud": 100,
-    "saludMaxima": 100,
-    "ataque": 10,
-    "defensaFisica": 5,
-    "defensaMagica": 7,
-    "efectosTemporales": [],
-    "inventario": [
-      {
-        "nombre": "Poción de curación",
-        "tipo": "pocion",
-        "manos": 0,
-        "tiposPermitidos": [
-          "Todos"
-        ],
-        "disponible": true,
-        "modificadores": [
-          {
-            "tipo": "curacion",
-            "modo": "aumentar",
-            "valor": 0.3
-          }
-        ]
-      },
-      {
-        "nombre": "espada de una mano",
-        "tipo": "equipo",
-        "manos": 1,
-        "tiposPermitidos": [
-          "Guerrero"
-        ],
-        "disponible": false,
-        "modificadores": [
-          {
-            "tipo": "daño",
-            "modo": "aumentar",
-            "valor": 2,
-            "afecta": {
-              "habilidad": "Ataque básico",
-              "tipoDanio": "fisico"
-            }
-          }
-        ]
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
       }
     ]
   }

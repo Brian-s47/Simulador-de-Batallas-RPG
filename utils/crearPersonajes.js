@@ -4,8 +4,9 @@ const readline = require('readline');
 const Guerrero = require('../src/ClasePersonajes/Guerrero');
 const Arquero = require('../src/ClasePersonajes/Arquero');
 const Mago = require('../src/ClasePersonajes/Mago');
-const Objeto = require('../src/ClaseInventario/Objeto');
 const objetosDisponibles = require('../data/objetos.json');
+const Objeto = require('../src/ClaseInventario/Objeto'); 
+
 const { guardarPersonaje } = require('./personajeUtils');
 const main = require('../index'); // Importa la función main desde index.js
 
@@ -104,41 +105,52 @@ _'._.)' .'.' )_.'
         personaje = new Mago(nombre);
     }
 
+    // 🎒 Filtrar objetos compatibles con el tipo de personaje
+    const opcionesIniciales = objetosDisponibles.filter(obj =>
+        obj.disponible &&
+        obj.nivel === 1 && // ✅ SOLO objetos de nivel 1
+        (obj.tiposPermitidos.includes(personaje.tipo) || obj.tiposPermitidos.includes('Todos'))
+        );
+
+    // 🎒 Selección de objetos iniciales
     const { seleccionObjetos } = await inquirer.prompt([
-        {
-            type: 'checkbox',
-            name: 'seleccionObjetos',
-            message: 'Selecciona 2 objetos iniciales:',
-            choices: objetosDisponibles.map(obj => ({
-                name: obj.nombre,
-                value: obj.nombre
-            })),
-            validate: function (respuesta) {
-                if (respuesta.length !== 2) {
-                    return 'Debes seleccionar exactamente 2 objetos.';
-                }
-                return true;
-            }
+    {
+        type: 'checkbox',
+        name: 'seleccionObjetos',
+        message: 'Selecciona 2 objetos iniciales:',
+        choices: opcionesIniciales.map(obj => ({
+        name: `${obj.nombre} (${obj.tipo})`,
+        value: obj.nombre
+        })),
+        validate: function (respuesta) {
+        if (respuesta.length !== 2) {
+            return 'Debes seleccionar exactamente 2 objetos.';
         }
+        return true;
+        }
+    }
     ]);
 
+    // 🎁 Construir objetos seleccionados
     const objetosSeleccionados = seleccionObjetos.map(nombre => {
-        const datos = objetosDisponibles.find(obj => obj.nombre === nombre);
+    const datos = objetosDisponibles.find(obj => obj.nombre === nombre);
 
-        if (!datos) {
-            console.error(`❌ No se encontró el objeto con nombre "${nombre}".`);
-            return null;
-        }
+    if (!datos) {
+        console.error(`❌ No se encontró el objeto con nombre "${nombre}".`);
+        return null;
+    }
 
-        return new Objeto(datos);
+    return new Objeto(datos);
     }).filter(obj => obj !== null);
 
-    objetosSeleccionados.forEach(obj => {
-        personaje.inventario.agregarObjeto(obj);
-        if (obj.tipo === 'equipo') {
-            personaje.inventario.cambiarEquipo(obj.nombre);
-        }
-    });
+    // ➕ Agregar objetos al inventario y equipar si aplica
+    for (const obj of objetosSeleccionados) {
+    personaje.inventario.agregarObjeto(obj);
+
+    if (obj.tipo === 'equipo') {
+        await personaje.inventario.cambiarEquipo(obj.nombre); // respeta lógica de manos
+    }
+    }
     console.log(chalk.yellowBright.bold(`\n✅ ¡El personaje de clase ${chalk.magenta(tipo)} llamado ${chalk.cyan(nombre)} ha sido creado exitosamente!\n`));
 
     await guardarPersonaje(personaje);
