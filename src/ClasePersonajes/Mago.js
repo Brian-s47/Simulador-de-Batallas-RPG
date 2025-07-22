@@ -55,7 +55,7 @@ class Mago extends Personaje {
   }
   // Metodo de habilidad "Bola de fuego"
   usarBolaDeFuego(objetivo) {
-    let danioBase = 5;
+    let danioBase = 100;
     let danio = danioBase;
     const detalles = [`🔥 Daño base: ${danioBase}`];
 

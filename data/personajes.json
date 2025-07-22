@@ -3,10 +3,10 @@
     "id": "e1b871b1-8eb5-4695-9cb0-076ca14d047a",
     "nombre": "MagoNivel1",
     "tipo": "Mago",
-    "nivel": 1,
-    "salud": 100,
-    "saludMaxima": 100,
-    "ataque": 10,
+    "nivel": 2,
+    "salud": 110,
+    "saludMaxima": 110,
+    "ataque": 12,
     "defensaFisica": 5,
     "defensaMagica": 7,
     "efectosTemporales": [],
@@ -50,6 +50,46 @@
           }
         ],
         "descripcion": "Instrumento mágico canalizador de fuego arcano. Potencia la habilidad Bola de fuego aumentando su daño mágico."
+      },
+      {
+        "nombre": "Báculo ígneo superior",
+        "nivel": 2,
+        "tipo": "equipo",
+        "manos": 2,
+        "tiposPermitidos": [
+          "Mago"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "daño",
+            "modo": "aumentar",
+            "valor": 4,
+            "afecta": {
+              "habilidad": "Bola de fuego",
+              "tipoDanio": "magico"
+            }
+          }
+        ],
+        "descripcion": "Báculo forjado en volcanes mágicos. Potencia en gran medida el daño mágico de la Bola de fuego."
+      },
+      {
+        "nombre": "Poción de curación",
+        "nivel": 1,
+        "tipo": "pocion",
+        "manos": 0,
+        "tiposPermitidos": [
+          "Todos"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "curacion",
+            "modo": "aumentar",
+            "valor": 0.3
+          }
+        ],
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
       }
     ]
   },
@@ -493,5 +533,18 @@
         "descripcion": "Una espada equilibrada y confiable usada por soldados del reino. Aumenta el daño físico del ataque básico del guerrero."
       }
     ]
+  },
+  {
+    "id": "da18e2e2-afc3-49a3-86eb-56655bf4f9cb",
+    "nombre": "Orco Defensor",
+    "tipo": "Enemigo",
+    "nivel": 1,
+    "salud": 71,
+    "saludMaxima": 150,
+    "ataque": 5,
+    "defensaFisica": 6,
+    "defensaMagica": 2,
+    "efectosTemporales": [],
+    "inventario": []
   }
 ]

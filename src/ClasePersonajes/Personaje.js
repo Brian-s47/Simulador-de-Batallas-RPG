@@ -1,6 +1,8 @@
 const { v4: uuidv4 } = require('uuid');
 const Inventario = require('../ClaseInventario/Inventario');
 const { guardarPersonaje } = require('../../utils/personajeUtils');
+const objetosDisponibles = require('../../data/objetos.json');
+const Objeto = require('../ClaseInventario/Objeto'); 
 
 class Personaje {
   constructor(nombre, tipo, nivel = 1) {
@@ -83,6 +85,43 @@ class Personaje {
     if (!this.inventario) return;
     return this.inventario.cambiarEquipo(nombreObjeto);
   }
+  subirNivel() {
+    this.nivel += 1;
+    this.saludMaxima += 10;
+    this.salud = this.saludMaxima;
+    this.ataque += 2;
+
+    console.log(`${this.nombre} ha subido al nivel ${this.nivel}`);
+
+    // 🎁 OBJETO DE NIVEL ACTUAL
+    const compatibles = objetosDisponibles.filter(obj =>
+      obj.nivel === this.nivel &&
+      (obj.tiposPermitidos.includes(this.tipo) || obj.tiposPermitidos.includes('Todos'))
+    );
+
+    if (compatibles.length > 0) {
+      const seleccionado = compatibles[Math.floor(Math.random() * compatibles.length)];
+      const nuevoObjeto = new Objeto(seleccionado);
+      this.inventario.agregarObjeto(nuevoObjeto);
+      console.log(`🎁 ¡Has recibido el objeto: "${nuevoObjeto.nombre}"!`);
+    } else {
+      console.log(`⚠️ No se encontraron objetos compatibles de nivel ${this.nivel}`);
+    }
+
+    // 🧪 Poción de curación garantizada
+    const pocionBase = objetosDisponibles.find(obj =>
+      obj.nombre === "Poción de curación"
+    );
+
+    if (pocionBase) {
+      const pocion = new Objeto(pocionBase);
+      this.inventario.agregarObjeto(pocion);
+      console.log(`🧪 ¡También recibiste una poción de curación!`);
+    } else {
+      console.log(`⚠️ No se encontró la poción de curación en los objetos disponibles.`);
+    }
+  }
+  
 
 }
 
