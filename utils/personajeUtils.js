@@ -1,9 +1,6 @@
 const path = require('path');
 const { Low, JSONFile } = require('lowdb');
 
-const Guerrero = require('../src/ClasePersonajes/Guerrero');
-const Arquero = require('../src/ClasePersonajes/Arquero');
-const Mago = require('../src/ClasePersonajes/Mago');
 const Inventario = require('../src/ClaseInventario/Inventario');
 
 // 🧩 Base de datos
@@ -37,12 +34,15 @@ function deserializarPersonaje(data) {
 
   switch (data.tipo) {
     case 'Guerrero':
+      const Guerrero = require('../src/ClasePersonajes/Guerrero');
       personaje = new Guerrero(data.nombre);
       break;
     case 'Arquero':
+      const Arquero = require('../src/ClasePersonajes/Arquero');
       personaje = new Arquero(data.nombre);
       break;
     case 'Mago':
+      const Mago = require('../src/ClasePersonajes/Mago');
       personaje = new Mago(data.nombre);
       break;
     default:

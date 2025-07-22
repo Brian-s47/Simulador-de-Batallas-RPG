@@ -1,4 +1,5 @@
-const Personaje = require('./Personaje');
+const Personaje = require('./Personaje.js');
+console.log('DEBUG >> Personaje:', typeof Personaje);
 
 class Guerrero extends Personaje {
   constructor(nombre) {
