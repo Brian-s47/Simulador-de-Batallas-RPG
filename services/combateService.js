@@ -1,6 +1,27 @@
 const inquirer = require('inquirer');
 const chalk = require('chalk');
-const { guardarPersonaje } = require('../utils/personajeUtils');
+const wrapAnsi = require('wrap-ansi'); // opcional, para envolver texto
+const util = require('util');
+const sleep = util.promisify(setTimeout);
+const readline = require('readline');
+const { eliminarPersonaje, guardarPersonaje } = require('../utils/personajeUtils');
+
+
+
+
+function esperarTecla() {
+  return new Promise(resolve => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    rl.question('\n🕹️ Presiona Enter para continuar...', () => {
+      rl.close();
+      resolve();
+    });
+  });
+}
 
 // Función principal del sistema de combate
 async function iniciarCombate(personaje, enemigo) {
@@ -9,10 +30,8 @@ async function iniciarCombate(personaje, enemigo) {
   let turnoJugador = true;
 
   while (personaje.estaVivo() && enemigo.estaVivo()) {
-    if (personaje.nivel > 5) {
-    console.log(chalk.yellowBright.bold(`\n👑 ¡${personaje.nombre} ha superado todos los niveles de la Torre!\n🎉 ¡Victoria total!`));
-    continuar = false;
-    return;
+  if (personaje.nivel === 6) {
+    await mostrarFinalSecreto(personaje);
   }
     console.log(chalk.magenta(`\n❤️ ${personaje.nombre}: ${personaje.salud}/${personaje.saludMaxima} HP`));
     console.log(chalk.red(`💀 ${enemigo.nombre}: ${enemigo.salud}/${enemigo.saludMaxima} HP\n`));
@@ -32,12 +51,64 @@ async function iniciarCombate(personaje, enemigo) {
   }
 
   if (personaje.estaVivo()) {
-    console.log(chalk.greenBright(`\n🏆 ¡${personaje.nombre} ha derrotado a ${enemigo.nombre}!\n`));
-    personaje.subirNivel();
+    console.clear();
+    console.log(chalk.greenBright.bold(`\n🏆 ¡Victoria!\n`));
+    console.log(chalk.yellow(`${personaje.nombre} ha vencido a ${enemigo.nombre} tras un duelo desafiante.`));
+    await sleep(1500);
+
+    console.log(chalk.cyanBright(`\n🧬 El poder fluye por sus venas...`));
+    await sleep(1000);
+    console.log(chalk.cyanBright(`🔺 Subiendo al nivel ${personaje.nivel + 1}...\n`));
+    await sleep(1000);
+
+    const recompensa = personaje.subirNivel(); // modificaremos este método para que retorne el objeto recibido
     await guardarPersonaje(personaje);
-  } else {
-    console.log(chalk.redBright(`\n💀 ${personaje.nombre} ha sido derrotado por ${enemigo.nombre}...\n`));
-  }
+
+    if (recompensa && recompensa.nombre) {
+      const info = [
+        chalk.magenta.bold(`🎁 Objeto recibido: ${recompensa.nombre}`),
+        chalk.gray(`📝 ${recompensa.descripcion}`),
+        chalk.gray(`📦 Tipo: ${recompensa.tipo} ${recompensa.manos ? `(${recompensa.manos} manos)` : ''}`)
+      ];
+
+      if (Array.isArray(recompensa.modificadores)) {
+        recompensa.modificadores.forEach(mod => {
+          let modText = `➕ ${mod.tipo} ${mod.modo} ${mod.valor}`;
+          if (mod.afecta) {
+            modText += ` (aplica a ${mod.afecta.habilidad || 'todos'}, tipo: ${mod.afecta.tipoDanio || '-'})`;
+          }
+          info.push(chalk.gray(modText));
+        });
+      }
+
+      console.log('\n' + info.join('\n'));
+    }
+
+    await esperarTecla();
+  }else {
+  console.clear();
+  console.log(chalk.redBright.bold(`\n💀 ${personaje.nombre} ha sido derrotado por ${enemigo.nombre}...\n`));
+  await new Promise(resolve => setTimeout(resolve, 1200));
+
+  console.log(chalk.gray(`El eco de tu caída resuena en las cámaras de la torre...`));
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  console.log(chalk.gray(`Tu historia se detiene aquí... pero no termina para siempre.`));
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  console.log(chalk.yellowBright(`\n📜 Los héroes caen... pero las leyendas se reescriben.`));
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log(chalk.whiteBright(`\n🌠 ${personaje.nombre}, tu sacrificio será recordado.\n`));
+
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log(chalk.red(`🗑️ Eliminando a ${personaje.nombre} de los registros del reino...\n`));
+
+  await eliminarPersonaje(personaje.id);
+
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log(chalk.gray(`\n🕹️ Presiona Enter para regresar al menú principal...`));
+
+  await esperarTecla(); // reutiliza la función de espera que definimos antes
+}
+
 }
 
 // Turno del jugador
