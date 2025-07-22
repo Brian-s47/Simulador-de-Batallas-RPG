@@ -385,5 +385,59 @@
         "descripcion": "Escudo de madera reforzada. Permite reducir el daño físico recibido mediante una defensa básica efectiva."
       }
     ]
+  },
+  {
+    "id": "6290999b-ab74-4149-8acb-6d7057ae5f05",
+    "nombre": "Juanito :)",
+    "tipo": "Mago",
+    "nivel": 1,
+    "salud": 100,
+    "saludMaxima": 100,
+    "ataque": 10,
+    "defensaFisica": 5,
+    "defensaMagica": 7,
+    "efectosTemporales": [],
+    "inventario": [
+      {
+        "nombre": "Poción de curación",
+        "nivel": 1,
+        "tipo": "pocion",
+        "manos": 0,
+        "tiposPermitidos": [
+          "Todos"
+        ],
+        "disponible": true,
+        "modificadores": [
+          {
+            "tipo": "curacion",
+            "modo": "aumentar",
+            "valor": 0.3
+          }
+        ],
+        "descripcion": "Creada con esencias raras y magia pura. Recupera un 30% de la salud máxima al consumirla."
+      },
+      {
+        "nombre": "Báculo de fuego",
+        "nivel": 1,
+        "tipo": "equipo",
+        "manos": 2,
+        "tiposPermitidos": [
+          "Mago"
+        ],
+        "disponible": false,
+        "modificadores": [
+          {
+            "tipo": "daño",
+            "modo": "aumentar",
+            "valor": 2,
+            "afecta": {
+              "habilidad": "Bola de fuego",
+              "tipoDanio": "magico"
+            }
+          }
+        ],
+        "descripcion": "Instrumento mágico canalizador de fuego arcano. Potencia la habilidad Bola de fuego aumentando su daño mágico."
+      }
+    ]
   }
 ]
