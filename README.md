@@ -1,207 +1,167 @@
-# Simulador de Batallas RPG
+# 🧙‍♂️ Simulador de Batallas RPG (CLI - Node.js)
 
-## 🌟 Descripción General
-
-Este proyecto es un simulador de batallas estilo RPG por turnos, enfocado en la creación, personalización y evolución de personajes. Los jugadores pueden elegir entre distintas clases (Guerrero, Arquero o Mago), equiparlos con objetos, mejorar sus habilidades y enfrentarse a enemigos o entre ellos.
-
-### 🧙‍♂️ Dinámica
-
-* Crear personajes con inventario inicial y defensa personalizada.
-* Gestionar el inventario: equipar objetos, usar pociones, reemplazar equipo.
-* Participar en batallas donde las estadísticas y objetos influyen en el daño y la defensa.
-* Aplicar efectos temporales y recibir recompensas luego de las batallas.
+Un juego de rol por turnos basado en consola donde el jugador crea y gestiona héroes que ascienden por la temida **Torre de los Tres Caminos**. Usa estrategia, equipo y habilidades únicas para sobrevivir a enemigos cada vez más peligrosos. ¡Una experiencia envolvente con estilo visual interactivo, efectos temporales y progresión por niveles!
 
 ---
 
-## 📂 Estructura del Proyecto
+## 🎮 Características Principales
+
+- ✅ Creación de personajes con clases únicas: **Guerrero**, **Mago**, **Arquero**.
+- 🧩 Sistema de inventario dinámico: armas, pociones y objetos especiales.
+- ⚔️ Combate por turnos con habilidades y decisiones tácticas.
+- 🧠 IA básica de enemigos.
+- 🏆 Subida de nivel y progresión tras cada batalla.
+- 🌈 Interfaz visual en consola con `chalk` y `boxen` para una experiencia estilizada.
+- 💾 Guardado persistente con `lowdb` en formato JSON.
+- 🔁 Repetición de combates, gestión de personajes y personalización posterior.
+
+---
+
+## 🏗️ Estructura del Proyecto
 
 ```
 SIMULADOR-DE-BATALLAS-RPG
-├── data/
-│   ├── enemigos.json
-│   ├── objetos.json
-│   └── personajes.json
+├── index.js                         # Punto de entrada principal
+├── data/                           # Datos persistentes del juego
+│   ├── personajes.json             # Personajes creados
+│   ├── enemigos.json               # Plantillas de enemigos
+│   └── objetos.json                # Objetos disponibles
 ├── src/
-│   ├── ClaseInventario/
-│   │   ├── Arma.js
-│   │   ├── Armadura.js
-│   │   ├── Inventario.js
-│   │   ├── Objeto.js
-│   │   └── Pocion.js
-│   └── ClasePersonajes/
-│       ├── Arquero.js
-│       ├── Guerrero.js
-│       ├── Mago.js
-│       └── Personaje.js
+│   ├── ClasePersonajes/           # Sistema de herencia de clases
+│   │   ├── Personaje.js
+│   │   ├── Guerrero.js
+│   │   ├── Arquero.js
+│   │   └── Mago.js
+│   └── ClaseInventario/           # Modelo de inventario y objetos
+│       ├── Inventario.js
+│       ├── Objeto.js
+│       ├── Arma.js
+│       ├── Armadura.js
+│       └── Pocion.js
 ├── utils/
-│   ├── consola.js
-│   ├── generadorID.js
-│   └── personajeUtils.js
-├── index.js
+│   ├── crearPersonajes.js          # Menú de creación
+│   ├── gestionarPersonajes.js      # Menú de gestión y acciones
+│   ├── generadorEnemigos.js        # Generación aleatoria de enemigos
+│   ├── narrador.js                 # Narrativa e introducción por nivel
+│   ├── personajeUtils.js           # Guardado, carga y serialización
+│   └── consola.js                  # Estilización (en construcción)
+├── combateService.js               # Motor de combate (turnos y lógica)
+├── GestorBatalla.js                # Ciclo de batallas con decisión
 ├── package.json
-├── README.md
-└── test.js
+└── README.md                       # Este archivo
 ```
 
 ---
 
-## 🎨 Lógica del Juego
+## 🧠 Mecánicas del Juego
 
-### 👨‍💻 Clases y Herencias
+### 👤 Clases Jugables
 
-* `Personaje` (clase base): contiene atributos comunes como salud, ataque, defensa, nivel, etc.
-* `Guerrero`, `Arquero`, `Mago`: heredan de `Personaje` y tienen habilidades especiales.
+| Clase     | Descripción                                                                 |
+|-----------|-----------------------------------------------------------------------------|
+| 🛡️ Guerrero | Especialista en defensa física, usa armas pesadas y escudos.              |
+| 🏹 Arquero   | Balance entre ataque físico y mágico, con habilidades a distancia.        |
+| 🔮 Mago      | Poder ofensivo mágico con control de elementos (fuego, hielo, reflejo).   |
 
-### 📚 Inventario y Objetos
-
-* Clase `Inventario`: almacena objetos y controla qué está equipado.
-* Clase `Objeto`: representa armas, armaduras o pociones.
-* Equipamiento limitado por manos (2), se valida en `cambiarEquipo()`.
-* Efectos modificadores de objetos pueden:
-
-  * Aumentar daño (`tipo: 'daño'`)
-  * Incrementar defensa (`tipo: 'defensa'`)
-  * Curar (`tipo: 'curacion'`)
-  * Absorber daño (`tipo: 'absorcion'`)
-
-### ✨ Habilidades
-
-Cada clase tiene habilidades específicas:
-
-#### Guerrero
-
-* Ataque básico (físico)
-* Furia (mayor daño)
-
-#### Arquero
-
-* Flecha perforante (daño físico)
-* Flecha arcana (daño mágico)
-
-#### Mago
-
-* Bola de fuego / hielo (daño mágico)
-* Reflejo (absorción de daño)
-
-### 📊 Estados Temporales
-
-* Efectos aplicados por pociones u objetos (curación, refuerzo, debuffs).
-* Se almacenan en el array `efectosTemporales`.
-
-### 💰 Recompensas y Progresión
-
-* Tras cada batalla:
-
-  * se puede subir de nivel,
-  * recibir objetos nuevos,
-  * aplicar efectos de mejora.
+Cada clase tiene acceso a habilidades únicas según su rol.
 
 ---
 
+### 🧰 Sistema de Inventario
+
+- Maneja un inventario limitado por manos.
+- Equipamiento activo afecta estadísticas del personaje.
+- Uso de **pociones** y **cambio de objetos** en combate.
+- Objetos tienen modificadores como:
+  - `curacion`, `daño`, `defensa`, `absorcion`.
+
 ---
 
-## Diagrama UML
+### 🧙 Combate y Habilidades
 
-![alt text](<Diagrama UML.png>)
+- Sistema **por turnos** con IA de enemigos.
+- Habilidades definidas en cada clase (`getHabilidades()`).
+- Menú interactivo para usar habilidades o gestionar el inventario.
+- Al finalizar combate:
+  - El personaje sube de nivel.
+  - Puede obtener mejoras o nuevos objetos (por implementar).
+  - Si muere, su progreso se pierde.
 
-```
+---
 
-## ⚖️ Librerías Usadas y Versiones
+### 📦 Guardado y Base de Datos
 
-Asegurate de instalar estas librerías:
+- El juego guarda automáticamente los personajes en `personajes.json`.
+- Al cargar un personaje, su clase e inventario se **deserializan correctamente** con lógica personalizada.
+- Los objetos en inventario se restauran a instancias funcionales gracias a la clase `Inventario.js`.
+
+---
+
+## 📜 Estética y Experiencia en Consola
+
+Gracias a `chalk` y `boxen`, el juego ofrece:
+
+- Colores según contexto (verde: éxito, rojo: peligro, azul: info, etc).
+- Marcos decorativos con bordes, padding y estilos únicos.
+- Uso de íconos Unicode para mejorar la ambientación (💀🧙‍♂️🎒🗡️).
+
+---
+
+## 📥 Instalación
 
 ```bash
-npm install inquirer@9.1.5 lowdb@6.0.1 uuid@9.0.0 chalk@5.3.0
-```
-
-* `inquirer`: para menús interactivos por consola.
-* `lowdb`: base de datos JSON simple y rápida.
-* `uuid`: generador de IDs únicos para los personajes.
-* `chalk`: para colorear mensajes en consola (a implementar en consola.js).
-
----
-
-## 🏙️ Diagrama de Entidades (actualizado)
-
-```
-+---------------+
-|   Personaje   |
-+---------------+
-| id            |
-| nombre        |
-| tipo          |
-| salud         |
-| ataque        |
-| defensaFisica |
-| defensaMagica |
-| inventario    |
-| nivel         |
-+---------------+
-       |
-       | hereda
-       v
-+-------------+   +-------------+   +-------------+
-|  Guerrero   |   |   Arquero   |   |    Mago     |
-+-------------+   +-------------+   +-------------+
-| habilidad   |   | habilidad   |   | habilidad   |
-+-------------+   +-------------+   +-------------+
-
-+--------------+
-|  Inventario  |
-+--------------+
-| objetos[]    |
-| equipados[]  |
-+--------------+
-       |
-       v
-+------------+
-|  Objeto     |
-+------------+
-| nombre      |
-| tipo        |
-| manos       |
-| modificadores[] |
-| tiposPermitidos |
-+------------+
+git clone https://github.com/Brian-s47/Simulador-de-Batallas-RPG.git
+cd Simulador-de-Batallas-RPG
+npm install
 ```
 
 ---
 
-## 🛠️ Comandos de Uso
-
-### Ejecutar la app
+## 🚀 Ejecutar el Juego
 
 ```bash
 node index.js
 ```
 
-### Crear personaje
+---
 
-Menú interactivo:
+## 🛠️ Dependencias
 
-* Elegís nombre, clase, defensa secundaria (si aplica) y objetos iniciales.
-
-### Ver personajes
-
-Muestra lista de personajes guardados.
+```json
+{
+  "chalk": "^4.1.2",
+  "inquirer": "^8.2.6",
+  "lowdb": "^3.0.0",
+  "uuid": "^9.0.1",
+  "boxen": "^5.1.2"
+}
+```
 
 ---
 
-## 🔧 Próximos pasos
+## 🧪 Próximos Pasos
 
-* Implementar motor de batallas (daño, turnos, IA, etc.).
-* Diseñar interfaz de usuario.
-* Incorporar sistema de recompensas.
-* Guardar historial de batallas.
-
----
-
-## 📁 Integrantes
-
-Brian Fair Suarez Porras
-Jhon Isaac Medina Florez
-Joan Sebastian Omaña Suarez
+- 💬 Sistema de diálogos entre personajes o con NPCs.
+- 💾 Historial de batallas y log de decisiones.
+- 🎁 Sistema de recompensas aleatorias tras cada batalla.
+- 🧠 IA más compleja (habilidades defensivas o debuffs).
+- 🌍 Implementar mapa o rutas (ramificaciones narrativas).
+- 🌐 Integración visual con GUI o migración a versión web.
 
 ---
 
-☑ï Archivo listo para entrega y uso colaborativo ✔️
+## 📹 Video demostrativo
+
+Aquí puedes ver una demostración en video del funcionamiento del proyecto:
+🔗 [Ver video en YouTube](https://youtu.be/qQ-Unb2XakM)  
+
+
+## 🧑‍🤝‍🧑 Créditos
+
+> Desarrollado por:
+
+- **Brian Fair Suarez Porras**
+- **Jhon Isaac Medina Mendoza**
+- **Joan Sebastian Omaña Suarez**
+
+Gracias por probar nuestro juego. ¡Tu próxima batalla te espera!
