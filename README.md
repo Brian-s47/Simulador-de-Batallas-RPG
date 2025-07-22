@@ -26,29 +26,30 @@ SIMULADOR-DE-BATALLAS-RPG
 │   ├── personajes.json             # Personajes creados
 │   ├── enemigos.json               # Plantillas de enemigos
 │   └── objetos.json                # Objetos disponibles
+├── services/                           # Datos persistentes del juego
+│   ├── GestorBatalla.js                # Ciclo de batallas con decisión                 
+│   ├── combateService.js               # Motor de combate (turnos y lógica)
 ├── src/
 │   ├── ClasePersonajes/           # Sistema de herencia de clases
 │   │   ├── Personaje.js
 │   │   ├── Guerrero.js
 │   │   ├── Arquero.js
+│   │   ├── Enemigo.js
 │   │   └── Mago.js
 │   └── ClaseInventario/           # Modelo de inventario y objetos
 │       ├── Inventario.js
 │       ├── Objeto.js
-│       ├── Arma.js
-│       ├── Armadura.js
-│       └── Pocion.js
 ├── utils/
 │   ├── crearPersonajes.js          # Menú de creación
 │   ├── gestionarPersonajes.js      # Menú de gestión y acciones
 │   ├── generadorEnemigos.js        # Generación aleatoria de enemigos
 │   ├── narrador.js                 # Narrativa e introducción por nivel
 │   ├── personajeUtils.js           # Guardado, carga y serialización
-│   └── consola.js                  # Estilización (en construcción)
-├── combateService.js               # Motor de combate (turnos y lógica)
-├── GestorBatalla.js                # Ciclo de batallas con decisión
+├── .gitignore
+├── Diagrama UML.png
 ├── package.json
-└── README.md                       # Este archivo
+├── package-lock.json
+└── README.md       
 ```
 
 ---
